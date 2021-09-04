@@ -27,16 +27,17 @@ const Navigation = (props) =>{
     
     return(
         <ThemeProvider theme = {darkTheme}>
-            <AppBar style = {{background: "#000000"}}>
+            <AppBar style = {{background: "#000000", maxHeight: "15vh"}}>
                 <Toolbar>
                     <a href = "/" className = {classes.anchor}>
-                    <MenuItem onClick = {() => props.history.push('/')}>
+                    <MenuItem>
                         Home
                     </MenuItem>
                     </a>
-                    <a href = "/" className = {classes.anchor}>
-                    <MenuItem onClick = {() => props.history.push('/')}>
-                        About (Also takes you home for now)
+
+                    <a href = "/about" className = {classes.anchor}>
+                    <MenuItem>
+                        About FTPMania
                     </MenuItem>
                     </a>
 
@@ -44,9 +45,9 @@ const Navigation = (props) =>{
 
 
                     <Box edge = "end">
-                        <a href = "/" className = {classes.anchor}>
-                        <MenuItem onClick = {() => props.history.push('/')}>
-                            Contact (Guess where this takes ya)
+                        <a href = "/contact" className = {classes.anchor}>
+                        <MenuItem>
+                            Contact
                         </MenuItem>
                         </a>
                     </Box>

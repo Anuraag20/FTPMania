@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { Button, CssBaseline, Grid, Typography } from '@material-ui/core';
+import { Button, CardActionArea, CssBaseline, Grid, Typography, Card, CardMedia, Box } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
 import { darkTheme, lightTheme } from '../CustomTheme'
 const CreateRoom = (props) => {
@@ -67,39 +67,48 @@ const CreateRoom = (props) => {
     return (    
         <ThemeProvider theme = {darkTheme}>
             <CssBaseline />
-            <Grid>
-                <Grid container spacing={1}>
-                    <Grid item xs={12} align="center">
-                    <Typography component="h2" variant="h2">
+            <Grid style = {{maxHeight: "80vh"}}>
+            <Box style = {{textAlign: "center"}}>
+                    <Typography component="h2" variant="h2" >
                         FTP Mania
                     </Typography>
-                    </Grid>
-                </Grid>
+                    <Box minWidth = "38vw" minHeight = "30vh" p = {1}>
+                       
+                       <CardMedia
+                           
+                           component="img"
+                           alt="FTPMania"
+                           width = "500"
+                           height = "300"
+                           image="/static/images/favicon2.png"
+                           title="FTPMania"
+                           />
+                    </Box>
+            </Box> 
 
-                <Grid container spacing={3}>
-                    <Grid item xl={6} align="center">
-                            <Button
-                            color="primary"
-                            variant="contained"
-                            size = "large"
-                            onClick={handleRoomButtonPressed}
-                            >
-                            Create Room
-                            </Button>
-                    </Grid>
-                    <Grid item xl={6} align="center">
-                            <Button
-                            color="secondary"
-                            variant="contained"
-                            size = "large"
-                            onClick={() => props.history.push("/room/")}
-                            >
-                            Join A Room
-                            </Button>
-            
-                    </Grid>
-                </Grid>
-            </Grid> 
+            <Box pb = {1} style = {{textAlign: "center"}} width = "40vw">
+                <Button
+                fullWidth
+                color="primary"
+                variant="contained"
+                size = "large"
+                onClick={handleRoomButtonPressed}
+                >
+                Create Room
+                </Button>
+            </Box>
+            <Box style = {{margin: "auto"}} width = "30vw">
+                <Button
+                fullWidth
+                color="secondary"
+                variant="contained"
+                size = "large"
+                onClick={() => props.history.push("/room/")}
+                >
+                Join A Room
+                </Button>
+            </Box>
+        </Grid>
         </ThemeProvider>          
     );
 }

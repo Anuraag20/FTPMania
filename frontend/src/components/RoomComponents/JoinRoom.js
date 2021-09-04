@@ -13,7 +13,6 @@ import {
   DialogTitle,
   CircularProgress,
   CssBaseline,
-  Box
 } from '@material-ui/core';
 
 
@@ -161,7 +160,7 @@ const JoinRoom = (props) => {
         return(
             <ThemeProvider theme = {darkTheme}>
                 <CssBaseline />
-                <Grid justifyContent = "center">
+                <Grid container spacing = {3} justifyContent = "center">
                     <Grid container spacing={1}>
                         <Grid item xs={12} align="center">
                         <Typography component="h1" variant="h2">
@@ -172,6 +171,9 @@ const JoinRoom = (props) => {
 
                     <Grid container spacing={2} align="center">
                         <TextField
+                        align = "center"
+                        inputProps={{min: 0, style: { textAlign: 'center' }}}
+                        autoComplete='off'
                         onKeyPress = {handleJoinKeyPress}
                         error = {roomError}
                         autoFocus
@@ -185,8 +187,8 @@ const JoinRoom = (props) => {
                         />
                     </Grid>
 
-                    <Grid container spacing = {3} align = "center">
-                        <Grid item xl = {6}>
+                 
+                        <Grid item xl = {12}>
 
                             <Button
                             size = "medium"
@@ -207,19 +209,7 @@ const JoinRoom = (props) => {
                             >
                             Join The Room
                             </Button>
-                        </Grid>
-                        <Grid item xl = {6}>
-
-                            <Button
-                            color="secondary"
-                            size = "medium"
-                            variant="contained"
-                            onClick = {() => props.history.push('/')}
-                            >
-                            Home Page
-                            </Button>
-
-                        </Grid>
+                       
                     </Grid>
                 </Grid> 
             </ThemeProvider>
@@ -262,7 +252,7 @@ const JoinRoom = (props) => {
         if (errorStatus == 404){
 
             setNoRoom(true);
-            setRoomError("No such room exists. Tip: room codes are CaSe SenSiTive");
+            setRoomError("No such room exists. Tip: Room Codes are CaSe SenSiTive");
         }
 
         else{ 
