@@ -48,7 +48,7 @@ const Room = (props) =>{
 
   const [members, setMembers] = useState([])
   const [isLocked, setIsLocked] = useState(props.isLocked);
-  const[isActive, setIsActive] = useState(true);
+  const [isActive, setIsActive] = useState(true);
 
   
   const [timeLeft, setTimeLeft] = useState();
@@ -299,8 +299,8 @@ const Room = (props) =>{
       onComplete = {() => setIsActive(false)}
       //primary first, secondary next
       colors={[
-      ["#ff4385", 0.9],
-      ["#f50057", 0.1],
+      [darkState? "#7d4fba": "#3f51b5", 0.9],
+      [darkState? "#ff4085": "#f50057", 0.1],
       ]}>
 
 
@@ -419,9 +419,16 @@ const Room = (props) =>{
 
               <Divider />
 
+              
+              
               <Fab color="secondary" aria-label="add" className={classes.fabButton} onClick = {() => setDarkState(!darkState)}>
-                {!darkState? <NightsStayIcon />: <WbSunnyIcon/>}
+              <Tooltip title = {darkState? "You really want to change to light mode?" : "MY EYEES, MY EYYEES."} interactive>
+                <span>
+                  {!darkState? <NightsStayIcon />: <WbSunnyIcon/>}
+                </span>
+                </Tooltip>
               </Fab>
+              
 
               <Box edge = "end" pr = {5}>
                 

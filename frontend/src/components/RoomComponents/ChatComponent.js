@@ -1,24 +1,28 @@
 import React, {useState, useEffect, useRef} from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
 
-import Grid from '@material-ui/core/Grid';
-import Divider from '@material-ui/core/Divider';
-import TextField from '@material-ui/core/TextField';
-import Typography from '@material-ui/core/Typography';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import Avatar from '@material-ui/core/Avatar';
-import Fab from '@material-ui/core/Fab';
+import { 
+    makeStyles,
+    Paper,
+    Box,
+    Grid,
+    Divider,
+    TextField,
+    Typography,
+    List,
+    ListItem,
+    ListItemIcon,
+    ListItemText,
+    Avatar,
+    Fab,
+    Card
+ } from '@material-ui/core';
+
 import SendIcon from '@material-ui/icons/Send';
 import { client } from 'websocket';
 import moment from 'moment';
 
 import FileManager from './FileManager';
-import { Card } from '@material-ui/core';
+
 
 const useStyles = makeStyles((theme) => ({
     divider: {
@@ -179,11 +183,12 @@ const ChatComponent = (props) => {
             <Grid item xs={6} className={classes.borderRight500}>
 
                 <List className={classes.messageArea}>
-                    <Paper pt = {1} align = "center" style = {{width: '25vw'}}>
-                        
-                        <ListItemText primary = "Hi there fellow maniac!" />
-                        
-                    </Paper>
+
+                    {chats == "" &&
+                        <Paper elevation = {5} pt = {1} align = "center" style = {{width: '25vw'}}>
+                            <ListItemText primary = "Start the convo!" />
+                        </Paper> 
+                    }
                     {chats}
 
                     <li ref={scrollRef} />

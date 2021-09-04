@@ -41,6 +41,11 @@ const Navigation = (props) =>{
                     </MenuItem>
                     </a>
 
+                    <a href = "/terms" className = {classes.anchor}>
+                    <MenuItem>
+                        T&amp;C
+                    </MenuItem>
+                    </a>
                     <div className = {classes.rightAlign} />
 
 

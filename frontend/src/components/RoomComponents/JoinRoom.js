@@ -173,7 +173,7 @@ const JoinRoom = (props) => {
                         <TextField
                         align = "center"
                         inputProps={{min: 0, style: { textAlign: 'center' }}}
-                        autoComplete='off'
+                        autoComplete = 'off'
                         onKeyPress = {handleJoinKeyPress}
                         error = {roomError}
                         autoFocus
@@ -286,6 +286,7 @@ const JoinRoom = (props) => {
                     <DialogTitle id="form-dialog-title"> Enter your name </DialogTitle>
                     <DialogContent>
                         <TextField
+                        autoComplete = 'off'
                         inputProps={{ maxLength: 20 }}
                         autoFocus
                         onKeyPress = {handleKeyPress}

@@ -80,7 +80,7 @@ const CreateRoom = (props) => {
                            alt="FTPMania"
                            width = "500"
                            height = "300"
-                           image="/static/images/favicon2.png"
+                           image="/static/images/favicon.png"
                            title="FTPMania"
                            />
                     </Box>
