@@ -14,8 +14,6 @@ from botocore.client import Config
 from botocore.exceptions import ClientError
 from django.conf import settings
 
-
-
 # Create your views here
 MINUTES_TO_EXPIRY = 45
 MAX_ROOM_FILE_SIZE = 750 * 1000000
@@ -37,11 +35,14 @@ def space_left(room):
         Bucket = settings.AWS_STORAGE_BUCKET_NAME
         ).get('Contents')
 
-    for i in response_contents:
-        size_of_files += i['Size']
+    if (response_contents):
+        for i in response_contents:
+            size_of_files += i['Size']
+            
+        return  MAX_ROOM_FILE_SIZE - size_of_files if MAX_ROOM_FILE_SIZE - size_of_files > 0 else 0
+    else:
+        return MAX_ROOM_FILE_SIZE
      
-    return  MAX_ROOM_FILE_SIZE - size_of_files if MAX_ROOM_FILE_SIZE - size_of_files > 0 else 0 
-    
 def is_space_available(room, received_file):    
 
     remaining_space = space_left(room)
@@ -52,8 +53,6 @@ def is_space_available(room, received_file):
     else:
         return True, size(remaining_space, system = si)
     
-    
-
 def expired(created_at):
     now = datetime.now(timezone.utc)
     minutes = (now - created_at).seconds//60
@@ -77,7 +76,6 @@ def send_channel_message(group_name, type_of_message, message):
         "type": type_of_message,
         'message': message
     })
-
 
 def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_NAME, expiration = 3600):
     
