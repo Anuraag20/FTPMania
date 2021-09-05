@@ -229,8 +229,7 @@ const ChatComponent = (props) => {
                 </List>
                 <Divider />
                 <Box style={{height: "44vh", overflow: 'auto'}}>
-
-                    <List>
+                    <List style = {{width: "100%"}}>
                         {props.files}
                     </List>
                 </Box>

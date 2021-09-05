@@ -1,7 +1,7 @@
 import React, {useState, useEffect, Suspense} from 'react';
 import {render} from 'react-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { darkTheme, lightTheme } from '../CustomTheme';
+import { darkTheme } from '../CustomTheme';
 import {
   Grid, 
   Typography, 
@@ -139,8 +139,13 @@ const JoinRoom = (props) => {
     };
 
     const handleJoinKeyPress = (event) => {
+
+        if (event.target.value.length == 3){
+            setRoomCode((prevRoomCode) => prevRoomCode + '-')
+        }
+
         if (event.code === "Enter" || event.code === "NumpadEnter") {
-          
+            
             if(!roomCode){
                 setRoomError("Please Enter the Room Code");
             }
@@ -172,7 +177,7 @@ const JoinRoom = (props) => {
                     <Grid container spacing={2} align="center">
                         <TextField
                         align = "center"
-                        inputProps={{min: 0, style: { textAlign: 'center' }}}
+                        inputProps={{min: 0, maxLength: 7, style: { textAlign: 'center', textTransform: "uppercase" }}}
                         autoComplete = 'off'
                         onKeyPress = {handleJoinKeyPress}
                         error = {roomError}
@@ -252,7 +257,7 @@ const JoinRoom = (props) => {
         if (errorStatus == 404){
 
             setNoRoom(true);
-            setRoomError("No such room exists. Tip: Room Codes are CaSe SenSiTive");
+            setRoomError("No such room exists...");
         }
 
         else{ 
