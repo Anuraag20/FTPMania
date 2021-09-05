@@ -36,7 +36,7 @@ import {client, w3cwebsocket as W3Cwebsocket} from "websocket"
 
 
 const Room = (props) =>{
-
+  
   const [darkState, setDarkState] = useState(true); 
 
   const roomCode = props.roomCode;
@@ -135,7 +135,6 @@ const Room = (props) =>{
     client = new W3Cwebsocket('ws://localhost:8000/ws/room/' + roomCode +'/')
     
     client.onmessage = (receivedData) => {
-      
       
       let data = JSON.parse(receivedData.data);
 
@@ -294,7 +293,7 @@ const Room = (props) =>{
       size = {95}
       isPlaying
       id = "hello"
-      duration = {2700}
+      duration = {4500}
       initialRemainingTime = {timeLeft}
       onComplete = {() => setIsActive(false)}
       //primary first, secondary next
@@ -305,9 +304,33 @@ const Room = (props) =>{
 
 
         {({ remainingTime }) => {
+          const hour = Math.floor(remainingTime / (60*60))
+          if (hour>0) {
+            remainingTime = remainingTime % 3600
+          }
           const minutes = Math.floor(remainingTime / 60)
           const seconds = remainingTime % 60
 
+          if(hour > 0){
+
+            if(minutes >= 10 && seconds >= 10) {
+              return <Typography> {hour}:{minutes}:{seconds} </Typography>
+            }
+            
+            else if(minutes >= 10 && seconds < 10) {
+              return <Typography> {hour}:{minutes}:0{seconds} </Typography>
+            }
+  
+            else if(seconds < 10) {
+              return <Typography> {hour}:0{minutes}:0{seconds} </Typography>
+            }
+            
+            else{
+              return <Typography> {hour}:0{minutes}:{seconds} </Typography>
+            }
+    
+          }
+          
           if(minutes >= 10 && seconds >= 10) {
             return <Typography> {minutes}:{seconds} </Typography>
           }

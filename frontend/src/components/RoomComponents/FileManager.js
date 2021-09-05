@@ -10,7 +10,6 @@ import {
     Fab,
     ListItemIcon,
     ListItemText,
-
     Box
     
 } from '@material-ui/core';
@@ -20,7 +19,9 @@ import React, {useState} from 'react';
 import Dropzone from 'react-dropzone';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
 
+
 const FileManager = (props) =>{
+
     
     const [progress, setProgress] = useState(0.01);
     const [file, setFile] = useState();
@@ -28,6 +29,7 @@ const FileManager = (props) =>{
     const [fileOpen, setFileOpen] = useState(false);
     const [spaceError, setSpaceError] = useState(0);
 
+    
 
     const postFile = () => {
 

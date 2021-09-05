@@ -3,7 +3,7 @@ from rest_framework import generics, status
 from .serializers import *
 from .models import *
 
-from hurry.filesize import size, si
+from hurry.filesize import size
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from channels.layers import get_channel_layer
@@ -15,8 +15,8 @@ from botocore.exceptions import ClientError
 from django.conf import settings
 
 # Create your views here
-MINUTES_TO_EXPIRY = 45
-MAX_ROOM_FILE_SIZE = 750 * 1000000
+MINUTES_TO_EXPIRY = 90
+MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):
 
@@ -48,10 +48,10 @@ def is_space_available(room, received_file):
     remaining_space = space_left(room)
     
     if received_file.size > remaining_space:
-        return False, size(remaining_space, system = si)
+        return False, size(remaining_space)
 
     else:
-        return True, size(remaining_space, system = si)
+        return True, size(remaining_space)
     
 def expired(created_at):
     now = datetime.now(timezone.utc)

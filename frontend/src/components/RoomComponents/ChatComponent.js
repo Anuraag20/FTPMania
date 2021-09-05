@@ -224,7 +224,7 @@ const ChatComponent = (props) => {
             <Grid item xs = {4}>
                 <List style={{maxHeight: "7vh", overflow: 'hidden'}}>
                     <Typography color = {props.darkState? "white" :"primary"} component = "h5" variant = "h5">
-                        Received Files ({Math.round(props.sizeLeft/1000000)} MB Left)
+                        Received Files ({Math.round(props.sizeLeft/(1024*1024))} MB Left)
                     </Typography>
                 </List>
                 <Divider />
