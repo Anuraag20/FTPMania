@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
-import { Button, CardActionArea, CssBaseline, Grid, Typography, Card, CardMedia, Box } from '@material-ui/core';
+import { Button, CssBaseline, Grid, Typography, CardMedia, Box } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { darkTheme, lightTheme } from '../CustomTheme'
+import { darkTheme } from '../CustomTheme'
 const CreateRoom = (props) => {
 
     const [data, setData]= useState({});
@@ -86,7 +86,7 @@ const CreateRoom = (props) => {
                     </Box>
             </Box> 
 
-            <Box pb = {1} style = {{textAlign: "center"}} width = "40vw">
+            <Box pb = {1} style = {{margin: "auto"}} width = "40vw">
                 <Button
                 fullWidth
                 color="primary"

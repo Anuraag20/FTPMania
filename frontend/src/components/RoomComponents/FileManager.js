@@ -156,7 +156,7 @@ const FileManager = (props) =>{
                     if(props.sizeLeft < file.size){
                         setFileDrop(false);
                         setFileOpen(false);
-                        setSpaceError(Math.round(props.sizeLeft/1000000) + 'MB');
+                        setSpaceError(Math.round(props.sizeLeft/(1024*1024)) + 'MB');
                     }
                     else{
                         e.preventDefault();

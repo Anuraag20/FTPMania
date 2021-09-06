@@ -64,8 +64,8 @@ def expired(created_at):
 
 def time_left(created_at):
     now = datetime.now(timezone.utc)
-    minutes = 60*MINUTES_TO_EXPIRY - (now - created_at).seconds
-    return minutes
+    seconds_left = 60*MINUTES_TO_EXPIRY - (now - created_at).seconds
+    return seconds_left
 
 def send_channel_message(group_name, type_of_message, message):
 
@@ -77,7 +77,7 @@ def send_channel_message(group_name, type_of_message, message):
         'message': message
     })
 
-def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_NAME, expiration = 3600):
+def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_NAME, expiration = MINUTES_TO_EXPIRY*60):
     
     """Generate a presigned URL to share an S3 object
 

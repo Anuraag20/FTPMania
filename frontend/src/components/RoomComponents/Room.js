@@ -31,6 +31,7 @@ import LockIcon from '@material-ui/icons/Lock';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
 import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
+import GetAppIcon from '@material-ui/icons/GetApp';
 
 import {client, w3cwebsocket as W3Cwebsocket} from "websocket"
 
@@ -132,7 +133,7 @@ const Room = (props) =>{
     getTimeLeft();
     getFiles();
 
-    client = new W3Cwebsocket('ws://localhost:8000/ws/room/' + roomCode +'/')
+    client = new W3Cwebsocket('ws://'+ window.location.host +'/ws/room/' + roomCode +'/')
     
     client.onmessage = (receivedData) => {
       
@@ -280,12 +281,19 @@ const Room = (props) =>{
     const roomLogs = roomStatus.map((message) => message && <div> <MenuItem disabled = {true} key={message}> {message} </MenuItem> <Divider /> </div>);
     
     const fileURLs = fileURL.map((file) => file && 
-    <a className = {classes.anchor} href = {file.file_url} target = "_blank" > 
-
+     
+      
       <ListItem> 
-        {file.file_name.length > 55? file.file_name.slice(0, 65) + "...": file.file_name} 
+        {file.file_name.length > 40? file.file_name.slice(0, 40) + "...": file.file_name} 
+        
+        <Button style={{ marginLeft: "auto" }} size = "20"> 
+          <a className = {classes.anchor} href = {file.file_url} target = "_blank" > 
+            <GetAppIcon />
+          </a>
+        </Button>
       </ListItem> 
-    </a>);
+      
+    );
 
     const clock =  <MenuItem>
       
@@ -305,12 +313,18 @@ const Room = (props) =>{
 
         {({ remainingTime }) => {
           const hour = Math.floor(remainingTime / (60*60))
+          var minutes
+          var seconds
           if (hour>0) {
-            remainingTime = remainingTime % 3600
+            var tempTime = remainingTime % 3600;
+            minutes = Math.floor(tempTime / 60);
+            seconds = tempTime % 60;
           }
-          const minutes = Math.floor(remainingTime / 60)
-          const seconds = remainingTime % 60
-
+          else{
+            minutes = Math.floor(remainingTime / 60);
+            seconds = remainingTime % 60;
+          }
+          
           if(hour > 0){
 
             if(minutes >= 10 && seconds >= 10) {
@@ -572,6 +586,7 @@ const useStyles = makeStyles((theme) => ({
   anchor: {
     color: "inherit", 
     textDecoration: "inherit",
+    textAlign: "right",
   },
  
 }));
