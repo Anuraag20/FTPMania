@@ -46,6 +46,7 @@ const Room = (props) =>{
   
   const classes = useStyles();
 
+  const [tnc, setTnc] = useState(true);
 
   const [members, setMembers] = useState([])
   const [isLocked, setIsLocked] = useState(props.isLocked);
@@ -60,9 +61,11 @@ const Room = (props) =>{
   const [chatText, setChatText] = useState([]);
   const [fileURL, setFileURL] = useState([]);
 
-  const getMembers = () => {
 
-    const requestOptions = {
+
+  const getMembers = () => {
+    
+  const requestOptions = {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     };
@@ -301,7 +304,7 @@ const Room = (props) =>{
       size = {95}
       isPlaying
       id = "hello"
-      duration = {4500}
+      duration = {3600}
       initialRemainingTime = {timeLeft}
       onComplete = {() => setIsActive(false)}
       //primary first, secondary next
@@ -312,39 +315,11 @@ const Room = (props) =>{
 
 
         {({ remainingTime }) => {
-          const hour = Math.floor(remainingTime / (60*60))
-          var minutes
-          var seconds
-          if (hour>0) {
-            var tempTime = remainingTime % 3600;
-            minutes = Math.floor(tempTime / 60);
-            seconds = tempTime % 60;
-          }
-          else{
-            minutes = Math.floor(remainingTime / 60);
-            seconds = remainingTime % 60;
-          }
           
-          if(hour > 0){
+          const minutes = Math.floor(remainingTime / 60);
+          const seconds = remainingTime % 60;
+          setTimeLeft(remainingTime);
 
-            if(minutes >= 10 && seconds >= 10) {
-              return <Typography> {hour}:{minutes}:{seconds} </Typography>
-            }
-            
-            else if(minutes >= 10 && seconds < 10) {
-              return <Typography> {hour}:{minutes}:0{seconds} </Typography>
-            }
-  
-            else if(seconds < 10) {
-              return <Typography> {hour}:0{minutes}:0{seconds} </Typography>
-            }
-            
-            else{
-              return <Typography> {hour}:0{minutes}:{seconds} </Typography>
-            }
-    
-          }
-          
           if(minutes >= 10 && seconds >= 10) {
             return <Typography> {minutes}:{seconds} </Typography>
           }
@@ -389,7 +364,7 @@ const Room = (props) =>{
               { timeLeft && <CountdownCircleTimer
               size = {95}
               isPlaying
-              duration = {2700}
+              duration = {3600}
               initialRemainingTime = {timeLeft}
               onComplete = {() => setIsActive(false)}
               colors={[
@@ -534,6 +509,24 @@ const Room = (props) =>{
               </Button>
             </DialogActions>
           </Dialog>
+        
+          <Dialog open = {tnc} aria-labelledby="form-dialog-title">
+            <DialogTitle style = {{overflowWrap: "break-word"}} id="form-dialog-title"> 
+                Make sure you've read our T&amp;C! 
+            </DialogTitle>
+
+            <DialogActions>
+                <Button onClick = {() => setTnc(false)} color="primary">
+                I've gone through it
+                </Button>
+                
+                <a href = '/terms' className = {classes.anchor}>
+                  <Button color = "secondary">
+                      Take me there
+                  </Button>
+                </a>
+            </DialogActions>
+        </Dialog>
         
         </ThemeProvider>
       </div>

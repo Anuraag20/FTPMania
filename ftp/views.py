@@ -15,7 +15,7 @@ from botocore.exceptions import ClientError
 from django.conf import settings
 
 # Create your views here
-MINUTES_TO_EXPIRY = 90
+MINUTES_TO_EXPIRY = 60
 MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):
@@ -102,7 +102,7 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     except ClientError as e:
         print(e)
         return None
-
+    
     # The response contains the presigned URL
     return response
 

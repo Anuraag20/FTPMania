@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
 import { Button, CssBaseline, Grid, Typography, CardMedia, Box } from '@material-ui/core';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { darkTheme } from '../CustomTheme'
+import { darkTheme } from '../CustomTheme';
+
 const CreateRoom = (props) => {
 
     const [data, setData]= useState({});

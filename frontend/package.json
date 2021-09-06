@@ -28,6 +28,7 @@
     "material-ui-dropzone": "^3.5.0",
     "moment": "^2.29.1",
     "react-countdown-circle-timer": "^2.5.4",
+    "react-device-detect": "^1.17.0",
     "react-dropzone": "^11.3.4",
     "react-router-dom": "^5.2.0",
     "websocket": "^1.0.34"

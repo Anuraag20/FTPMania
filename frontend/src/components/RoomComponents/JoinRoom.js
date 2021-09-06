@@ -15,7 +15,6 @@ import {
   CssBaseline,
 } from '@material-ui/core';
 
-
 const JoinRoom = (props) => {
 
     
@@ -157,7 +156,6 @@ const JoinRoom = (props) => {
             }   
         } 
     };
-    
     
 
     if(noRoom)
