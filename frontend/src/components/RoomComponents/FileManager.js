@@ -87,7 +87,7 @@ const FileManager = (props) =>{
             {!file  && 
             
             <Box align = "center" pt = {1.5}>                
-                <Fab color="primary" size = 'small' disabled = {fileDrop == 'posting'} aria-label="add" onClick = {() => setFileDrop(true)}>
+                <Fab color = "secondary" size = 'small' disabled = {fileDrop == 'posting'} aria-label="add" onClick = {() => setFileDrop(true)}>
                     <AddIcon />
                 </Fab>
             </Box>
@@ -101,7 +101,8 @@ const FileManager = (props) =>{
                     <ListItemText primary={file.name.length > 65? file.name.slice(0, 24) + "...: ": file.name + ": "} />
 
                     <ListItemIcon>
-                    <CircularProgress size = {25} variant = "determinate" value = {progress} />
+                        {progress != 100 && <CircularProgress size = {25} variant = "determinate" value = {progress} />}
+                        {progress == 100 && <CircularProgress size = {25} />}
                     </ListItemIcon>
                     </ListItem> 
                 </List>

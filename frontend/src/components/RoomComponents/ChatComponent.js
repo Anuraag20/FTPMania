@@ -14,7 +14,7 @@ import {
     ListItemText,
     Avatar,
     Fab,
-    Card
+    InputAdornment
  } from '@material-ui/core';
 
 import SendIcon from '@material-ui/icons/Send';
@@ -113,10 +113,10 @@ const ChatComponent = (props) => {
 
             {props.name != chat.name && 
             <Grid item xs = {1}>
-                <Box pt = {2.5} >
+                <Box pt = {2.7} pr = {1}>
                     <Avatar alt = {chat.name}>  {chat.name.slice(0,1)} </Avatar>
                 </Box>
-            </Grid>
+            </Grid> 
             }
 
             <Grid item xs={11}>
@@ -134,7 +134,7 @@ const ChatComponent = (props) => {
 
             {props.name == chat.name && 
             <Grid item xs = {1}>
-                <Box pt = {2.7} >
+                <Box pt = {2.7} pl = {1}>
                     <Avatar alt = {props.name} />
                 </Box>
             </Grid>
@@ -197,26 +197,31 @@ const ChatComponent = (props) => {
 
              
                 <Grid container>
-                    <Grid item xs={11}>
-                        <Box pl = {2}>
+                    <Grid item xs={12}>
+                        <Box pl = {2} pr = {2}>
                             <TextField 
+                            InputProps = {{
+                                endAdornment: (
+                                    <Fab 
+                                    size = "small" 
+                                    color = "primary" 
+                                    aria-label="add" 
+                                    onClick = {sendMessage} >
+                                        <SendIcon/> 
+                                    </Fab>             
+                                )
+                              }}
                             className = {classes.textField} 
                             maxRows = {1} 
                             value = {chatBoxText} 
                             onChange = {(e) => setChatBoxText(e.target.value)}  
-                            placeholder = "Type Something" 
+                            placeholder = "Type Something..." 
                             onKeyPress = {handleKeyPress} 
                             variant = "outlined"
                             fullWidth
                             />
                         </Box>
                     </Grid>
-                    <Grid xs={1}>
-                        <Box pt = {0.7}>
-                            <Fab size = 'small' color="primary" aria-label="add" onClick = {sendMessage} > <SendIcon/> </Fab>
-                        </Box>
-                    </Grid>
-
                 </Grid>
             
             </Grid>

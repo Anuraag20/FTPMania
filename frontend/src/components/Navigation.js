@@ -29,33 +29,38 @@ const Navigation = (props) =>{
         <ThemeProvider theme = {darkTheme}>
             <AppBar style = {{background: "#000000", maxHeight: "15vh"}}>
                 <Toolbar>
+
                     <a href = "/" className = {classes.anchor}>
-                    <MenuItem>
-                        Home
-                    </MenuItem>
+                        <MenuItem>
+                            Home
+                        </MenuItem>
                     </a>
 
                     <a href = "/about" className = {classes.anchor}>
-                    <MenuItem>
-                        About FTPMania
-                    </MenuItem>
+                        <MenuItem>
+                            About FTPMania
+                        </MenuItem>
                     </a>
 
-                    <a href = "/terms" className = {classes.anchor}>
-                    <MenuItem>
-                        T&amp;C
-                    </MenuItem>
-                    </a>
-                    <div className = {classes.rightAlign} />
-
-
-                    <Box edge = "end">
-                        <a href = "/contact" className = {classes.anchor}>
+                    
+                    <a href = "/contact" className = {classes.anchor}>
                         <MenuItem>
                             Contact
                         </MenuItem>
+                    </a>
+                    
+
+                    
+                    <div className = {classes.rightAlign} />
+
+                    <Box edge = "end">
+                        <a className = {classes.anchor}>
+                            <MenuItem>
+                                Market Research
+                            </MenuItem>
                         </a>
                     </Box>
+
                 </Toolbar>
             </AppBar>
       </ThemeProvider>

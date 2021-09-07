@@ -2,7 +2,7 @@ import React, {Suspense} from 'react';
 import { CircularProgress, CssBaseline, Typography } from '@material-ui/core';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import { ThemeProvider } from '@material-ui/core/styles';
-import { isMobile, isAndroid }  from "react-device-detect";
+import { isDesktop }  from "react-device-detect";
 
 
 import { darkTheme } from './CustomTheme';
@@ -10,7 +10,7 @@ const App = () => {
     const CreateRoom = React.lazy(() => import('./RoomComponents/CreateRoom'));
     const JoinRoom = React.lazy(() => import('./RoomComponents/JoinRoom'));
     
-    if(isMobile || isAndroid){
+    if(!isDesktop){
         return(
         <div className = "center">
             <ThemeProvider theme = {darkTheme}>

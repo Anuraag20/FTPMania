@@ -70,24 +70,16 @@ const CreateRoom = (props) => {
             <CssBaseline />
             <Grid style = {{maxHeight: "80vh"}}>
             <Box style = {{textAlign: "center"}}>
-                    <Typography component="h2" variant="h2" >
-                        FTP Mania
-                    </Typography>
-                    <Box minWidth = "38vw" minHeight = "30vh" p = {1}>
-                       
-                       <CardMedia
-                           
-                           component="img"
-                           alt="FTPMania"
-                           width = "500"
-                           height = "300"
-                           image="/static/images/favicon.png"
-                           title="FTPMania"
-                           />
-                    </Box>
-            </Box> 
 
-            <Box pb = {1} style = {{margin: "auto"}} width = "40vw">
+                <Typography component = "h1" variant = "h1" >
+                    FTPMania
+                </Typography>
+
+            </Box> 
+            
+            <Grid container spacing = {2} style = {{margin: "auto", maxWidth: "40vw"}}> 
+            <Grid item xs = {6} >
+           
                 <Button
                 fullWidth
                 color="primary"
@@ -97,8 +89,9 @@ const CreateRoom = (props) => {
                 >
                 Create Room
                 </Button>
-            </Box>
-            <Box style = {{margin: "auto"}} width = "30vw">
+
+            </Grid>
+            <Grid item xs = {6} >
                 <Button
                 fullWidth
                 color="secondary"
@@ -108,8 +101,10 @@ const CreateRoom = (props) => {
                 >
                 Join A Room
                 </Button>
-            </Box>
+            </Grid>
+            </Grid>
         </Grid>
+
         </ThemeProvider>          
     );
 }

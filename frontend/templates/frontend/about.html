@@ -3,7 +3,15 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> FTP Mania - About </title>
+        <title>
+            FTP Mania - 
+            {% if request.path == '/terms/' %}
+                Terms
+            {% else %}
+                About
+            {% endif %}
+        </title>
+        
         {% load static %}
 
         <link rel="shortcut icon" href="{%  static 'favicon.ico' %}">

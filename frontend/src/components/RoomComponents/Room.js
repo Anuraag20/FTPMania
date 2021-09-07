@@ -501,10 +501,10 @@ const Room = (props) =>{
               </DialogContentText>
             </DialogContent>
             <DialogActions>
-              <Button onClick = {isHost? destroyRoom: leaveRoom} color="primary">
+              <Button onClick = {isHost? destroyRoom: leaveRoom} color = "primary">
                 Yes
               </Button>
-              <Button onClick = {() => setOpen(false)} color="primary" autoFocus>
+              <Button onClick = {() => setOpen(false)} color = "secondary" autoFocus>
                 No
               </Button>
             </DialogActions>
@@ -512,19 +512,21 @@ const Room = (props) =>{
         
           <Dialog open = {tnc} aria-labelledby="form-dialog-title">
             <DialogTitle style = {{overflowWrap: "break-word"}} id="form-dialog-title"> 
-                Make sure you've read our T&amp;C! 
+                Make sure you've read our ToS in its entirety! 
             </DialogTitle>
 
             <DialogActions>
-                <Button onClick = {() => setTnc(false)} color="primary">
-                I've gone through it
-                </Button>
-                
-                <a href = '/terms' className = {classes.anchor}>
-                  <Button color = "secondary">
-                      Take me there
+
+                <a href = '/terms' className = {classes.anchor} target = "_blank">
+                  <Button color = "primary">
+                    Take me there
                   </Button>
                 </a>
+
+                <Button onClick = {() => setTnc(false)} color = "secondary">
+                  I've gone through it
+                </Button>
+                
             </DialogActions>
         </Dialog>
         
