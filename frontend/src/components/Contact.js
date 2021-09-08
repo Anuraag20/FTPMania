@@ -74,7 +74,7 @@ const Contact = (props) => {
                 <AppBar style={{ background: appBarColor, boxShadow: 'none', top: 'auto', bottom: 0, height: "9vh"}}>
                     <Grid container spacing = {1} style = {{textAlign: "center", paddingBottom: "10px", paddingTop: "7px"}}>
                         <Grid item xs = {3}> 
-                            <SocialIcon url = "https://instagram.com" fgColor = "#FFFFFF" target = "_blank"/>
+                            <SocialIcon url = "https://www.instagram.com/anuraagtriestosing/" fgColor = "#FFFFFF" target = "_blank"/>
                             &nbsp;&nbsp;Instagram (I make music here!) 
                         </Grid>
 

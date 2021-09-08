@@ -7,8 +7,12 @@
             FTP Mania - 
             {% if request.path == '/terms/' %}
                 Terms
-            {% else %}
+            {% elif request.path == '/about/' %}
                 About
+            {% elif request.path == '/contact/' %}
+                Contact
+            {% elif request.path == '/research/' %}
+                Research
             {% endif %}
         </title>
         

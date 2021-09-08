@@ -1,12 +1,23 @@
-import { Typography } from '@material-ui/core';
-import React, {useState, useEffect} from 'react';
+import { Typography, Button, Box } from '@material-ui/core';
+import React from 'react';
 
 const GoodBye = (props) => {
 
     return (
-        <Typography commponent = "h2" variant = "h2" className = "center">
-            GoodBye, {props.name}!
-        </Typography>
+        <div className = "center">
+            <Typography commponent = "h2" variant = "h2" >
+                GoodBye, {props.name}!
+            </Typography>
+
+            <br />
+            <Box style = {{margin: 'auto', textAlign: 'center'}}>
+                <a href = "/research" style = {{color: "inherit", textDecoration: "inherit"}}>
+                    <Button color = "primary" variant = "contained" >
+                        Please take a minute to fill out this form!
+                    </Button>
+                </a>
+            </Box>
+        </div>
     )
 }
 

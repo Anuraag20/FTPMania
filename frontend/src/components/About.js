@@ -1,6 +1,6 @@
 import React, {useEffect} from 'react';
 import { ThemeProvider, makeStyles } from '@material-ui/core/styles';
-
+import Contact from './Contact';
 import { darkTheme } from './CustomTheme';
 import { 
     CssBaseline, 
@@ -9,7 +9,8 @@ import {
     CardMedia, 
     Typography, 
     Paper,
-    Divider
+    Divider,
+    CircularProgress
 } from '@material-ui/core';
 
 const About = (props) => {
@@ -113,6 +114,13 @@ const About = (props) => {
                                     <i> "Edward Snowden could have been avoided" </i> &nbsp;-&nbsp; The CIA (Probably, idk)
                                 </Typography>
                             </Paper>
+
+                            <Typography component = "body1" variant = "body1" >
+                                <br />
+                                If you have gotten this far, don't forget to read through our <a href = "/terms" style = {{color: "inherit"}}> Terms of Service</a>.
+                                <br />
+                                <br />
+                            </Typography>
                         </Grid>
                     </Grid>
                     <br />
@@ -125,52 +133,48 @@ const About = (props) => {
         );
     }
 
-    else {
+    else if(window.location.pathname == '/terms/'){
         return(
             <ThemeProvider theme = {darkTheme}>
             <CssBaseline />
-            <div style = {{paddingTop: "10vh"}}>
+            <div style = {{paddingTop: "8vh"}}>
                 
-            <Grid container = {1} justifyContent = "center"  style = {{paddingTop: "2vh"}}>
+                <Grid container = {1} justifyContent = "center"  style = {{paddingTop: "2vh"}}>
 
-            <Grid item xs = {12} style = {{textAlign: "center"}}>
-                <Typography component = "h3" variant = "h3"> Terms of Service </Typography>
-            </Grid>
-
-            <Paper style = {{margin: "auto", maxWidth: "80vw"}}>
-                <Typography component = "body1" variant = "body1">
+                <Paper style = {{margin: "auto", maxWidth: "80vw", paddingBottom: "1vh"}}>
+                    
                     <Grid item xs = {12} style = {{margin: "0vw 5vw"}}>
-                        <br />
-
-                        DISCLAIMER: The site does NOT use any encryption techniques as of now.
-                        <br />
-                        This is just a "proof-of-concept". So, <b> DO NOT </b> share any sensitive media over the Website.
-                        <br />
-                        <br />
-
-                        The site of this site is not liable in case any copyrighted material is unlawfully distributed by the end-user.
-                        <br />
-                        The site is also not liable in the event of a data breach.
-
-                        <br /> 
-                        Basically case mat thoko mujhpe!
 
                         <br />
-                        <br />                  
-                        <a style = {{color: "inherit"}} href = "https://portal.termshub.io/ftpmania.tech/website_tos/" target = "_blank">
-                            Click here for the full ToS 
-                        </a>
 
-                        <br />
-                        <br />
+                        <Box style = {{width: "60vw", height: "78vh"}}>
+                            <iframe 
+                            style = {{position: "relative", height: "100%", width: "100%"}}
+                            src="https://portal.termshub.io/ftpmania.tech/" 
+                            frameborder="0" 
+                            marginheight="0" 
+                            marginwidth="0">
+                            
+                                <CircularProgress color = "primary"/>
 
-                        Remember to follow the golden rule: <b> Don't be a dick! </b>
-                        <br />
-                        <br />
+                                
+                            </iframe>
+                        </Box>
 
+                        <Typography component = "body1" variant = "body1" >
+                            <div style = {{textAlign: "center"}}>
+                                <br />
+
+                                DISCLAIMER: The site does NOT use any client-side encryption techniques as of now.
+                                <b> DO NOT </b> share any sensitive material.
+                                <br />
+                     
+                            </div>
+                        </Typography>
+                        
                     </Grid>
-                </Typography>
-            </Paper>
+                    
+                </Paper>
 
             </Grid>
 
@@ -178,7 +182,39 @@ const About = (props) => {
         </ThemeProvider>
         );
     }
+
+    else if(window.location.pathname == '/contact/'){
+        return <Contact />;
+    }
+
+    else if(window.location.pathname == '/research/'){
+        return(
+            <ThemeProvider theme = {darkTheme}>
+                <CssBaseline />
+                <div style = {{paddingTop: "10vh"}}>
+                    <iframe 
+                    src="https://docs.google.com/forms/d/e/1FAIpQLSejqw9LLPxHeSl_FrovhpbUV4GLN8dTbqXmqocWvklCpl-j_A/viewform?embedded=true" 
+                    style = {{position: "relative", height: "100%", width: "100%"}}
+                    frameborder="0" 
+                    marginheight="0" 
+                    marginwidth="0"
+                    >
+                        <CircularProgress color = "primary"/>
+                        
+                    </iframe>
+                </div>
+
+            </ThemeProvider>
+
+        );
+    
+    }
+
+    else{
+        return <Typography component = "h2" variant = "h2"> Something went wrong... </Typography>
+    }
 }
+
 
 const useStyles = makeStyles ((theme) => ({
     '@global': {

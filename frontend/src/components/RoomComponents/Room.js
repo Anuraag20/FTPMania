@@ -368,31 +368,30 @@ const Room = (props) =>{
               initialRemainingTime = {timeLeft}
               onComplete = {() => setIsActive(false)}
               colors={[
-              ['#3f51b5', 0.9],
-              ['#ff1744', 0.1],
+                [darkState? "#7d4fba": "#3f51b5", 0.9],
+                [darkState? "#ff4085": "#f50057", 0.1],
               ]}>
 
+              {({ remainingTime }) => {
+                const minutes = Math.floor(remainingTime / 60);
+                const seconds = remainingTime % 60;
+                setTimeLeft(remainingTime);
 
-                {({ remainingTime }) => {
-                  const minutes = Math.floor(remainingTime / 60);
-                  const seconds = remainingTime % 60;
-                  setTimeLeft(remainingTime);
+                if(minutes >= 10 && seconds >= 10) {
+                  return <Typography> {minutes}:{seconds} </Typography>
+                }
+                
+                else if(minutes >= 10 && seconds < 10) {
+                  return <Typography> {minutes}:0{seconds} </Typography>
+                }
 
-                  if(minutes >= 10 && seconds >= 10) {
-                    return <Typography> {minutes}:{seconds} </Typography>
-                  }
-                  
-                  else if(minutes >= 10 && seconds < 10) {
-                    return <Typography> {minutes}:0{seconds} </Typography>
-                  }
-
-                  else if(seconds < 10) {
-                    return <Typography> 0{minutes}:0{seconds} </Typography>
-                  }
-                  
-                  else{
-                    return <Typography> 0{minutes}:{seconds} </Typography>
-                  }
+                else if(seconds < 10) {
+                  return <Typography> 0{minutes}:0{seconds} </Typography>
+                }
+                
+                else{
+                  return <Typography> 0{minutes}:{seconds} </Typography>
+                }
               }}
 
               </CountdownCircleTimer>
@@ -400,17 +399,18 @@ const Room = (props) =>{
     
             </Box> 
 
-          <Grid item xs = {12}>
+            <Grid item xs = {12}>
 
-            <ChatComponent 
-            darkState = {darkState}
-            chatText = {chatText} 
-            setChatText = {setChatText} 
-            name = {name} 
-            members = {members} 
-            client = {client} 
-            files = {fileURLs}
-            sizeLeft = {sizeLeft}/>
+              <ChatComponent 
+              darkState = {darkState}
+              chatText = {chatText} 
+              setChatText = {setChatText} 
+              name = {name} 
+              members = {members} 
+              client = {client} 
+              files = {fileURLs}
+              sizeLeft = {sizeLeft}/>
+
             </Grid> 
 
  

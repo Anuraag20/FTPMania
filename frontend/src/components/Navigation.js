@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar, Toolbar, Typography, Box, MenuItem } from '@material-ui/core';
+import { AppBar, Toolbar, Tooltip, Box, MenuItem } from '@material-ui/core';
 import { makeStyles, ThemeProvider } from '@material-ui/core/styles';
 
 import { darkTheme } from './CustomTheme';
@@ -42,21 +42,20 @@ const Navigation = (props) =>{
                         </MenuItem>
                     </a>
 
-                    
-                    <a href = "/contact" className = {classes.anchor}>
-                        <MenuItem>
-                            Contact
-                        </MenuItem>
+                    <a href = "/research" className = {classes.anchor}>
+                        <Tooltip title = "Help me out to collect some data!" interactive> 
+                            <MenuItem>
+                                Market Research
+                            </MenuItem>
+                        </Tooltip>
                     </a>
-                    
-
                     
                     <div className = {classes.rightAlign} />
 
                     <Box edge = "end">
-                        <a className = {classes.anchor}>
+                        <a href = "/contact" className = {classes.anchor}>
                             <MenuItem>
-                                Market Research
+                                Contact
                             </MenuItem>
                         </a>
                     </Box>

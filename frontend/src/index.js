@@ -12,7 +12,7 @@ try {
 
   }
   catch(err) {
-    console.log(err);
+    ;
 }
 
 const appDiv2 = document.getElementById("nav");
@@ -23,16 +23,9 @@ try {
     render(<About />, appDiv3)
   }
   catch(err) {
-    console.log(err);
+    ;
 }
 
 
-try {
-    const appDiv4 = document.getElementById("contact");
-    render(<Contact />, appDiv4)
-  }
-  catch(err) {
-    console.log(err);
-}
 
 
