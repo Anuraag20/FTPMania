@@ -75,23 +75,31 @@ const Contact = (props) => {
                     <Grid container spacing = {1} style = {{textAlign: "center", paddingBottom: "10px", paddingTop: "7px"}}>
                         <Grid item xs = {3}> 
                             <SocialIcon url = "https://www.instagram.com/anuraagtriestosing/" fgColor = "#FFFFFF" target = "_blank"/>
-                            &nbsp;&nbsp;Instagram (I make music here!) 
+                            <a href = "https://www.instagram.com/anuraagtriestosing/" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp;Instagram (I make music here!) 
+                            </a>
                         </Grid>
 
                         <Grid item xs = {3}> 
                             <SocialIcon url = "https://discord.gg/swyCTmCm9B" fgColor = "#FFFFFF" target = "_blank"/>
-                            &nbsp;&nbsp;Discord Server 
+                            <a href = "https://discord.gg/swyCTmCm9B" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp;Discord Server 
+                            </a>
                         </Grid>
 
                         <Grid item xs = {3}> 
                             <SocialIcon url = "https://github.com/Anuraag20" fgColor = "#FFFFFF" bgColor = "#000000" target = "_blank"/>
-                            &nbsp;&nbsp;GitHub
+                            <a href = "https://github.com/Anuraag20" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp;GitHub 
+                            </a>
                         </Grid>
 
                         
                         <Grid item xs = {3}> 
                             <SocialIcon url = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" bgColor = "#BB100B" fgColor = "#FFFFFF" target = "_blank"/>
-                            &nbsp;&nbsp;Email
+                            <a href = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp; ftpmania.tech@gmail.com 
+                            </a>
                         </Grid>
                     </Grid>
                 </AppBar>
@@ -113,6 +121,10 @@ const useStyles = makeStyles ((theme) => ({
         backgroundColor: 'rgb(0,0,0, .5)',
         outline: '1px solid slategrey'
       }
+    },
+    anchor: {
+        color: 'inherit',
+        textDecoration: 'inherit'
     }
   }));
 
