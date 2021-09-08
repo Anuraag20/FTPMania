@@ -184,7 +184,7 @@ const JoinRoom = (props) => {
                         id="code"
                         value = {roomCode} 
                         helperText = {roomError}
-                        onChange = {(e) => {setRoomCode(e.target.value)}}
+                        onChange = {(e) => {setRoomCode(e.target.value.toUpperCase())}}
                         type="code"
                         fullWidth
                         />

@@ -517,15 +517,19 @@ const Room = (props) =>{
 
             <DialogActions>
 
-                <a href = '/terms' className = {classes.anchor} target = "_blank">
-                  <Button color = "primary">
-                    Take me there
-                  </Button>
-                </a>
 
-                <Button onClick = {() => setTnc(false)} color = "secondary">
-                  I've gone through it
+              <Button onClick = {() => setTnc(false)} color = "primary">
+                I've gone through it
+              </Button>
+
+
+              <a href = '/terms' className = {classes.anchor} target = "_blank">
+                <Button color = "secondary">
+                  Take me there
                 </Button>
+              </a>
+
+
                 
             </DialogActions>
         </Dialog>
