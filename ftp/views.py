@@ -128,38 +128,34 @@ class CreateRoomView(APIView):
         
         if not self.request.session.exists(self.request.session.session_key):
             self.request.session.create()
+    
+        host = self.request.session.session_key
+        queryset = Room.objects.filter(host = host)
+
+        #Checks if the person creating the room is already the host of a room
+        if queryset.exists():
+            room = queryset[0]
+
+            if expired(room.created_at):
+                room.delete()
+            else:
+                data = {"already_host": str(room)}
+                return Response(data, status = status.HTTP_200_OK)
         
-        data = self.serializer_class(data = request.data)
-        if data.is_valid():
+        room = Room(host = host)
+        room.save()
 
-            host = self.request.session.session_key
-            queryset = Room.objects.filter(host = host)
+        guest = Guest.objects.filter(guest = host)
 
-            #Checks if the person creating the room is already the host of a room
-            if queryset.exists():
-                room = queryset[0]
+        if guest.exists():
+            guest = guest[0]
+            send_channel_message(str(guest.room), "member_left", guest.name)
+            guest.delete()
 
-                if expired(room.created_at):
-                    room.delete()
-                else:
-                    data = {"already_host": str(room)}
-                    return Response(data, status = status.HTTP_200_OK)
-            
-            room = Room(host = host)
-            room.save()
-
-            guest = Guest.objects.filter(guest = host)
-
-            if guest.exists():
-                guest = guest[0]
-                send_channel_message(str(guest.room), "member_left", guest.name)
-                guest.delete()
-
-            guest = Guest(guest = host, is_host = True, room = room)
-            guest.save()
-            return Response(self.serializer_class(room).data, status = status.HTTP_201_CREATED)
-
-        return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
+        guest = Guest(guest = host, is_host = True, room = room)
+        guest.save()
+        
+        return Response(self.serializer_class(room).data, status = status.HTTP_201_CREATED)
 
 class JoinRoom(APIView):
 
