@@ -519,7 +519,7 @@ const Room = (props) =>{
 
 
               <Button onClick = {() => setTnc(false)} color = "primary">
-                I've gone through it
+                I've read and accepted it
               </Button>
 
 

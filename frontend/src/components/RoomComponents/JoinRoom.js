@@ -266,7 +266,7 @@ const JoinRoom = (props) => {
 
                         {errorStatus == 403 && "Looks like the room has been locked by the host!"}
 
-                        {erroStatus == 301 && "This room has expired and will be deleted soon"}
+                        {errorStatus == 301 && "This room has expired and will be deleted soon"}
 
                         {errorStatus != 403 && errorStatus != 301 && "Something went wrong..."}
 
