@@ -78,6 +78,7 @@ class RoomConsumer(AsyncWebsocketConsumer):
                 'message': message
             }
         )
+        
     async def disconnect(self, close_code):
 
         await self.channel_layer.group_discard(
