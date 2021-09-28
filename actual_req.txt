@@ -1,0 +1,10 @@
+Django==2.2.15
+python-decouple==3.3
+djangorestframework
+channels==2.4.0
+psycopg2==2.8.5
+hurry.filesize
+boto3==1.16.15
+botocore==1.19.15
+
+django-storages==1.10.1
