@@ -20,7 +20,9 @@ MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):
 
+    session = boto3.session.Session()
     s3_client = boto3.client('s3', 
+    endpoint_url= 'https://nyc3.digitaloceanspaces.com',
     aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
     aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
     config=Config(signature_version='s3v4'),
@@ -29,10 +31,13 @@ def space_left(room):
 
     files = File.objects.filter(room = room)
     size_of_files = 0
-
+    response = s3_client.list_buckets()
+    print(s3_client.list_buckets())
+    spaces = [space['Name'] for space in response['Buckets']]
+    print("Spaces List: %s" % spaces)
     response_contents = s3_client.list_objects_v2(
-        Prefix = str(room.code) + '/',
-        Bucket = settings.AWS_STORAGE_BUCKET_NAME
+        Prefix = str(room) + '/',
+        Bucket = 'ftpmania'
         ).get('Contents')
 
     if (response_contents):
@@ -88,9 +93,12 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     """
   
     # Generate a presigned URL for the S3 object
-    s3_client = boto3.client('s3', 
-    aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
+    session = boto3.session.Session()
+
+    s3_client = session.client('s3', 
     aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
+    aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
+    endpoint_url = settings.AWS_S3_ENDPOINT_URL,
     config=Config(signature_version='s3v4'),
     region_name = settings.AWS_S3_REGION_NAME)
     try:
@@ -106,6 +114,9 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     # The response contains the presigned URL
     return response
 
+
+def create_file():
+    pass 
 
 
 class RoomView(generics.ListAPIView):

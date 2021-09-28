@@ -123,7 +123,6 @@ AWS_SECRET_ACCESS_KEY = config("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = config("AWS_STORAGE_BUCKET_NAME")
 AWS_S3_REGION_NAME = config("AWS_S3_REGION_NAME")
 AWS_S3_ENDPOINT_URL = config("AWS_S3_ENDPOINT_URL")
-AWS_LOCATION = config("AWS_LOCATION")
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
@@ -136,6 +135,8 @@ STATIC_URL = '/static/'
 TEMP = os.path.join(BASE_DIR, 'temp')
 # STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
+MEDIA_URL = 'https://%s/' % AWS_S3_ENDPOINT_URL
+MEDIAFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
