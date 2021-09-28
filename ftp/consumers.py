@@ -24,7 +24,6 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def lock_change(self, event):
         is_locked = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'lock_change_exists': True,
             'lock_change': is_locked
@@ -32,14 +31,12 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def member_joined(self, event):
         name = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'member_joined': name
         }))
 
     async def member_rejoined(self, event):
         names = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'member_rejoined': names
         }))
@@ -47,14 +44,12 @@ class RoomConsumer(AsyncWebsocketConsumer):
 
     async def member_left(self, event):
         name = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'member_left': name
         }))
     
     async def file_download(self, event):
         fileLink = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'file_download': fileLink
         }))
@@ -62,7 +57,6 @@ class RoomConsumer(AsyncWebsocketConsumer):
     
     async def room_destroyed(self, event):
         name = event['message']
-        #Had to add the 'exists' parameter to check at frontend what request was sent
         await self.send(text_data=json.dumps({
             'room_destroyed': 'Bye!'
         }))

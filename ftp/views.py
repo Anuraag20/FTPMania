@@ -310,8 +310,6 @@ class GetFiles(APIView):
         if file_field.exists():
             for x in range(len(file_field)):
                 data.append({"file_url": file_field[x].downloadURL, "file_name": file_field[x].roomFile.name[8:]})
-            
-            return Response({"files": data}, status = status.HTTP_200_OK)
         
         return Response({"files": data}, status = status.HTTP_200_OK)
 
