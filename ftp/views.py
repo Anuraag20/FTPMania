@@ -113,10 +113,6 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     return response
 
 
-def create_file():
-    pass 
-
-
 class RoomView(generics.ListAPIView):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
