@@ -22,7 +22,7 @@ def space_left(room):
 
     session = boto3.session.Session()
     s3_client = boto3.client('s3', 
-    endpoint_url= settings.AWS_S3_ENDPOINT_URL,
+    endpoint_url= 'https://nyc3.digitaloceanspaces.com',
     aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
     aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
     config=Config(signature_version='s3v4'),
