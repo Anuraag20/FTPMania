@@ -142,6 +142,7 @@ const Room = (props) =>{
       
       let data = JSON.parse(receivedData.data);
 
+      console.log(data)
       if(data.lock_change_exists){
         setIsLocked(data.lock_change);
       }
