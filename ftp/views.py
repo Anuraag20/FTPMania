@@ -31,15 +31,13 @@ def space_left(room):
 
     files = File.objects.filter(room = room)
     size_of_files = 0
-    response = s3_client.list_buckets()
-    print(s3_client.list_buckets())
-    spaces = [space['Name'] for space in response['Buckets']]
-    print("Spaces List: %s" % spaces)
+
     response_contents = s3_client.list_objects_v2(
-        Prefix = str(room) + '/',
+        Prefix = 'ftpmania/' + str(room) + '/',
         Bucket = 'ftpmania'
         ).get('Contents')
 
+    print(response_contents)
     if (response_contents):
         for i in response_contents:
             size_of_files += i['Size']
