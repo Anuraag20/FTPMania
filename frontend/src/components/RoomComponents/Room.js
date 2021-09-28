@@ -136,7 +136,7 @@ const Room = (props) =>{
     getTimeLeft();
     getFiles();
 
-    client = new W3Cwebsocket('ws://'+ window.location.host +'/ws/room/' + roomCode +'/')
+    client = new W3Cwebsocket('ws://'+ window.location.host +':8001/ws/room/' + roomCode +'/')
     
     client.onmessage = (receivedData) => {
       
