@@ -63,15 +63,6 @@ const Room = (props) =>{
   const [fileURL, setFileURL] = useState([]);
 
   var now = new moment();
-  
-  client.send(JSON.stringify({
-    message: {
-        name: "SOMEONE_HAS_JUST_JOINED_THE_ROOM",
-        message: "placeholder",
-        time: now.format("HH:mm"),
-        member_joined: name
-    }
-  }));
 
 
   const getMembers = () => {
@@ -149,6 +140,16 @@ const Room = (props) =>{
     getFiles();
 
     client = new W3Cwebsocket('ws://'+ window.location.host +':8001/ws/room/' + roomCode +'/')
+
+      
+    client.send(JSON.stringify({
+      message: {
+          name: "SOMEONE_HAS_JUST_JOINED_THE_ROOM",
+          message: "placeholder",
+          time: now.format("HH:mm"),
+          member_joined: name
+      }
+    }));
     
     client.onmessage = (receivedData) => {
       
