@@ -27,10 +27,6 @@ const CreateRoom = (props) => {
           
           fetch("/api/delete-room/", requestOptions)
           .then((response) => response.json())
-          .then((data) => {
-            setIsActive(false);
-            setOpen(false);
-          })
     }
 
 
