@@ -58,9 +58,9 @@ const FileManager = (props) =>{
                 setFile();
                 client.send(JSON.stringify({
                     message: {
-                        name: props.name,
-                        message: chatBoxText,
-                        time: now.format("HH:mm"),
+                        name: 'hi',
+                        message: 'hi',
+                        time: 'hi',
                     }
                 }));
             
