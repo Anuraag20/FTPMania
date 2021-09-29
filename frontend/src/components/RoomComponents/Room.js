@@ -175,27 +175,6 @@ const Room = (props) =>{
 
       }
 
-      if(data.member_left){
-       
-
-        if(data.member_left == name){
-          setIsActive(false)
-        }
-        else{
-          setMembers((prevMembers) => {
-            let index = prevMembers.indexOf(data.member_left);
-            if (index != -1){
-              prevMembers.splice(index, 1);
-            }
-
-            return prevMembers;
-          })
-          setRoomStatus((prevRoomStatus) => [...prevRoomStatus, data.member_left + " has left."]);
-        } 
-        
-
-      }
-
       if(data.room_destroyed){
         setIsActive(false);
         client.close();
@@ -215,6 +194,23 @@ const Room = (props) =>{
         }
         else if (data.message.name == 'ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE'){
           setIsLocked(false)
+        }
+        else if(data.message.name == 'SOMEONE_HAS_JUST_LEFT_THE_ROOM'){
+          if(data.message.member_left == name){
+            setIsActive(false)
+          }
+          else{
+            setMembers((prevMembers) => {
+              let index = prevMembers.indexOf(data.message.member_left);
+              if (index != -1){
+                prevMembers.splice(index, 1);
+              }
+  
+              return prevMembers;
+            })
+            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, data.message.member_left + " has left."]);
+          } 
+          
         }
         else{
           setChatText((prevText) => [...prevText, data.message])
@@ -262,14 +258,6 @@ const Room = (props) =>{
             time: now.format("HH:mm"),
         }
       }));
-      
-      client.send(JSON.stringify({
-        message: {
-            name: props.name,
-            message: chatBoxText,
-            time: now.format("HH:mm"),
-        }
-      }));
     }
   }
 
@@ -285,6 +273,15 @@ const Room = (props) =>{
       .then((data) => {
         setIsActive(false);
         setOpen(false);
+
+        client.send(JSON.stringify({
+          message: {
+              name: "SOMEONE_HAS_JUST_LEFT_THE_ROOM",
+              message: "placeholder",
+              time: now.format("HH:mm"),
+              member_left: this.name
+          }
+        }));
       })
   }
 
