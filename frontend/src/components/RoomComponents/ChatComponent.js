@@ -14,7 +14,6 @@ import {
     ListItemText,
     Avatar,
     Fab,
-    InputAdornment
  } from '@material-ui/core';
 
 import SendIcon from '@material-ui/icons/Send';

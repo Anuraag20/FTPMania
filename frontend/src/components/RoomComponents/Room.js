@@ -34,6 +34,7 @@ import NightsStayIcon from '@material-ui/icons/NightsStay';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
 import {client, w3cwebsocket as W3Cwebsocket} from "websocket"
+import moment from 'moment';
 
 
 const Room = (props) =>{
@@ -226,6 +227,8 @@ const Room = (props) =>{
 
   
   const handleLockChange = () => {
+
+    var now = new moment();
     
     if (!isLocked){
 
