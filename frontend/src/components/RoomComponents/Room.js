@@ -210,7 +210,7 @@ const Room = (props) =>{
         setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "A new file has been added."])
       }
 
-      if(data.message){
+      if(data.message && !data.message.fileData){
         if (data.message.name == name){
           setChatText((prevText) => prevText);
         }

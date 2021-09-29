@@ -26,7 +26,10 @@ const CreateRoom = (props) => {
           };
           
           fetch("/api/delete-room/", requestOptions)
-          .then((response) => response.json())
+          .then((response) => {
+              console.log(response.json())
+              return response.json()
+          })
     }
 
 
