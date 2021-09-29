@@ -70,7 +70,7 @@ const JoinRoom = (props) => {
                 setName(data.name);
                 setIsHost(data.is_host);
                 setIsLocked(data.is_locked);
-
+                console.log(data.is_locked)
                 setRoomValidated(true);
             }
         })
