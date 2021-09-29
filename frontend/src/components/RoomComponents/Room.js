@@ -112,7 +112,7 @@ const Room = (props) =>{
     .then((data) => {
       setFileURL([]);
       for (let i = 0; i < data.files.length; i++){
-        // console.log(data.files[i]);
+        console.log(data.files[i]);
         setFileURL((prevURLs) => [...prevURLs, data.files[i]]);
       }
     })
