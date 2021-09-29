@@ -100,20 +100,6 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     # The response contains the presigned URL
     return response
 
-
-class RoomView(generics.ListAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
-class GuestView(generics.ListAPIView):
-    queryset = Guest.objects.all()
-    serializer_class = GuestSerializer
-
-class FileView(generics.ListAPIView):
-    queryset = File.objects.all()
-    serializer_class = FileSerializer
-
-
 class CreateRoomView(APIView):
     serializer_class = RoomSerializer
    

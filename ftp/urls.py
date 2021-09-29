@@ -2,9 +2,6 @@ from django.urls import path
 from .views import *
 
 urlpatterns = [
-    path('room-view/', RoomView.as_view()),
-    path('guest-view/', GuestView.as_view()),
-    path('file-view/', FileView.as_view()),
     path('create-room/', CreateRoomView.as_view()),
     path('get-room/', JoinRoom.as_view()),
     path('update-islocked/', UpdateIsLocked.as_view()),
