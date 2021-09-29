@@ -241,7 +241,7 @@ const ChatComponent = (props) => {
 
                 <Divider />
                 <Box style={{maxHeight: "9vh", overflow: 'auto'}}>
-                    <FileManager sizeLeft = {props.sizeLeft} />
+                    <FileManager client = {client} sizeLeft = {props.sizeLeft} />
                 </Box>
             </Grid>
         </Grid>

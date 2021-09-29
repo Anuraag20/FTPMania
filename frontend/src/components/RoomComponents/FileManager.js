@@ -18,7 +18,7 @@ import AddIcon from '@material-ui/icons/Add';
 import React, {useState} from 'react';
 import Dropzone from 'react-dropzone';
 import InsertDriveFileIcon from '@material-ui/icons/InsertDriveFile';
-
+import { client } from 'websocket';
 
 const FileManager = (props) =>{
 
@@ -56,6 +56,11 @@ const FileManager = (props) =>{
                 
                 setFileDrop(false);
                 setFile();
+                client.send(JSON.stringify({
+                    file: {
+                        name: 'lol'
+                    }
+                }));
             
             }).
             catch(error => {
