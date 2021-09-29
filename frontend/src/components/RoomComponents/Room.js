@@ -182,13 +182,12 @@ const Room = (props) =>{
           setIsLocked(false)
         }
         else if (data.message.name == 'SOMEONE_HAS_JUST_JOINED_THE_ROOM'){
+          let index = members.indexOf(data.message.member_joined);
 
           if(data.message.member_joined == name){
             setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "You joined!"]);
           }
-         
-          let index = members.indexOf(data.message.member_joined);
-          if (index != -1){
+          else if (index != -1){
             setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " rejoined!"]);
           }
           else{
