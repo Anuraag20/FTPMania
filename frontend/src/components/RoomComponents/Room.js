@@ -279,7 +279,7 @@ const Room = (props) =>{
               name: "SOMEONE_HAS_JUST_LEFT_THE_ROOM",
               message: "placeholder",
               time: now.format("HH:mm"),
-              member_left: this.name
+              member_left: name
           }
         }));
       })
