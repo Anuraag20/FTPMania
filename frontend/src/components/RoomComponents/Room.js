@@ -158,14 +158,6 @@ const Room = (props) =>{
       
       let data = JSON.parse(receivedData.data);
 
-      console.log(data)
-
-      if(data.room_destroyed){
-        setIsActive(false);
-        client.close();
-      }
-
-      
       if(data.message){
         if (data.message.name == name){
           setChatText((prevText) => prevText);
@@ -186,9 +178,6 @@ const Room = (props) =>{
 
           if(data.message.member_joined == name){
             setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "You joined!"]);
-          }
-          else if (index != -1){
-            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " rejoined!"]);
           }
           else{
             setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " joined!"]);
@@ -213,10 +202,15 @@ const Room = (props) =>{
           } 
           
         }
+        else if(data.message.name == 'THE_ROOM_HAS_NOW_BEEN_DESTROYED'){
+          setIsActive(false);
+          client.close()
+        }
+
         else{
           setChatText((prevText) => [...prevText, data.message])
         }
-        
+   
       }
     }
 
@@ -295,6 +289,13 @@ const Room = (props) =>{
       .then((data) => {
         setIsActive(false);
         setOpen(false);
+        client.send(JSON.stringify({
+          message: {
+              name: "THE_ROOM_HAS_NOW_BEEN_DESTROYED",
+              message: "placeholder",
+              time: now.format("HH:mm"),
+          }
+        }));
       })
   }
 

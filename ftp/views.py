@@ -6,8 +6,6 @@ from .models import *
 from hurry.filesize import size
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from channels.layers import get_channel_layer
-from asgiref.sync import async_to_sync
 from datetime import datetime, timezone
 import boto3
 from botocore.client import Config
@@ -69,16 +67,6 @@ def time_left(created_at):
     now = datetime.now(timezone.utc)
     seconds_left = 60*MINUTES_TO_EXPIRY - (now - created_at).seconds
     return seconds_left
-
-def send_channel_message(group_name, type_of_message, message):
-
-    group_name = 'room_%s' % group_name
-    channel_layer = get_channel_layer()
-    async_to_sync(channel_layer.group_send)(group_name, 
-    {
-        "type": type_of_message,
-        'message': message
-    })
 
 def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_NAME, expiration = MINUTES_TO_EXPIRY*60):
     
@@ -154,7 +142,6 @@ class CreateRoomView(APIView):
 
         if guest.exists():
             guest = guest[0]
-            send_channel_message(str(guest.room), "member_left", guest.name)
             guest.delete()
 
         guest = Guest(guest = host, is_host = True, room = room)
@@ -214,7 +201,6 @@ class JoinRoom(APIView):
 
                         
                         #This is done if the guest was part of a different room previously, but not as a host. So we remove them 
-                        send_channel_message(str(guest.room), "member_left", guest.name)
                         guest.delete()
                     
                     
@@ -338,8 +324,6 @@ class UpdateIsLocked(APIView):
             room.is_locked = not room.is_locked
             room.save(update_fields = ['is_locked'])
 
-
-            send_channel_message(room.code, "lock_change", room.is_locked)
             return Response({'Updated': 'is_locked'}, status = status.HTTP_200_OK)
 
         return Response({'Bad Request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
@@ -398,13 +382,9 @@ class UpdateName(APIView):
                 guest.name = name
                 guest.save(update_fields = ['name'])
 
-                send_channel_message(code, "member_joined", name)
                 return Response({'new memeber': 'joined'}, status = status.HTTP_200_OK)
 
             else:
-                names = {'old_name': guest.name, 'new_name': name}
-                send_channel_message(code, "member_rejoined", names)
-                
                 guest.name = name
                 guest.save(update_fields = ['name'])
 
@@ -442,7 +422,6 @@ class FileUpload(APIView):
         file_field.save(update_fields = ['downloadURL'])
 
         data = {"file_url": file_field.downloadURL, "file_name": file_field.roomFile.name[8:]}
-        send_channel_message(room.code, "file_download", data)
         return Response({"file_upload_successful": data}, status = status.HTTP_202_ACCEPTED)
 
 class FileUploadSpace(APIView):
@@ -486,11 +465,9 @@ class LeaveRoom(APIView):
   
         #if the host leaves, we don't delete the entry. This is because we'll need 'is_host' later
         if guest.is_host:
-            send_channel_message(str(guest.room), "member_left", guest.name)
             return Response({"Exited": "Room Has Been Left"}, status = status.HTTP_200_OK)
 
         guest.delete()
-        send_channel_message(str(guest.room), "member_left", guest.name)
         return Response({"Exited": "Room Has Been Left"}, status = status.HTTP_200_OK)
             
 class DeleteRoom(APIView):
@@ -508,5 +485,4 @@ class DeleteRoom(APIView):
         room = Room.objects.filter(code = str(host.room))[0]
         room.delete()
 
-        send_channel_message(str(host.room), "room_destroyed", "placeholder")
         return Response({"Room Destroyed": "All the data has been purged"}, status = status.HTTP_301_MOVED_PERMANENTLY)
