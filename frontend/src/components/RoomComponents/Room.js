@@ -202,17 +202,16 @@ const Room = (props) =>{
         client.close();
       }
 
-      
-      //if(data.file_download)(this stopped working in production)
-      if(data.message.fileData){
-        getSpaceLeft()
-        setFileURL((prevURLs) => [...prevURLs, data.message.fileData.file_upload_successful] );
-        setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "A new file has been added."])
-      }
-
-      if(data.message && !data.message.fileData){
+      if(data.message){
         if (data.message.name == name){
           setChatText((prevText) => prevText);
+        }
+
+        else if (data.message.name == 'THIS_IS_SIGNIFYING_THAT_A_FILE_HAS_BEEN_SENT'){
+          getSpaceLeft()
+          getFiles();
+          setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "A new file has been added."])
+
         }
         else{
           setChatText((prevText) => [...prevText, data.message])
