@@ -227,6 +227,9 @@ const Room = (props) =>{
         headers: { "Content-Type": "application/json" },
       };
 
+      fetch("/api/update-islocked/", requestOptions)
+      .then((response) => response.json());
+
       client.send(JSON.stringify({
         message: {
             name: "ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE",
@@ -244,6 +247,9 @@ const Room = (props) =>{
         headers: { "Content-Type": "application/json" },
       };
 
+      fetch("/api/update-islocked/", requestOptions)
+      .then((response) => response.json());
+      
       client.send(JSON.stringify({
         message: {
             name: "ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE",
