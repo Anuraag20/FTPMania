@@ -63,7 +63,15 @@ const Room = (props) =>{
   const [fileURL, setFileURL] = useState([]);
 
   var now = new moment();
-
+  
+  client.send(JSON.stringify({
+    message: {
+        name: "SOMEONE_HAS_JUST_JOINED_THE_ROOM",
+        message: "placeholder",
+        time: now.format("HH:mm"),
+        member_joined: name
+    }
+  }));
 
 
   const getMembers = () => {
@@ -148,12 +156,6 @@ const Room = (props) =>{
 
       console.log(data)
 
-      if(data.member_joined){
-        setMembers((prevMembers) => [...prevMembers, data.member_joined]);
-        setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.member_joined + "'" + " joined!"]);
-      }
-
-      
       if(data.member_rejoined){
 
         if(data.member_rejoined.old_name == name){
@@ -182,6 +184,7 @@ const Room = (props) =>{
         client.close();
       }
 
+      
       if(data.message){
         if (data.message.name == name){
           setChatText((prevText) => prevText);
@@ -196,6 +199,23 @@ const Room = (props) =>{
         }
         else if (data.message.name == 'ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE'){
           setIsLocked(false)
+        }
+        else if (data.message.name == 'SOMEONE_HAS_JUST_JOINED_THE_ROOM'){
+
+          if(data.message.member_joined == name){
+            setIsActive(false);
+          }
+         
+          let index = members.indexOf(data.message.member_joined);
+          if (index != -1){
+            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + "rejoined!"]);
+            getMembers();
+          }
+          else{
+            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " joined!"]);
+            getMembers()
+          }
+
         }
         else if(data.message.name == 'SOMEONE_HAS_JUST_LEFT_THE_ROOM'){
           if(data.message.member_left == name){
