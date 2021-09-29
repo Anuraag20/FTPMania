@@ -108,6 +108,7 @@ const Room = (props) =>{
     fetch("/api/get-files/", requestOptions)
     .then((response) => response.json())
     .then((data) => {
+      setFileURL([]);
       for (let i = 0; i < data.files.length; i++){
         console.log(data.files[i]);
         setFileURL((prevURLs) => [...prevURLs, data.files[i]]);
