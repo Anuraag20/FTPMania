@@ -144,9 +144,6 @@ const Room = (props) =>{
       let data = JSON.parse(receivedData.data);
 
       console.log(data)
-      if(data.lock_change_exists){
-        setIsLocked(data.lock_change);
-      }
 
       if(data.member_joined){
         setMembers((prevMembers) => [...prevMembers, data.member_joined]);
@@ -207,12 +204,16 @@ const Room = (props) =>{
         if (data.message.name == name){
           setChatText((prevText) => prevText);
         }
-
         else if (data.message.name == 'THIS_IS_SIGNIFYING_THAT_A_FILE_HAS_BEEN_SENT'){
           getSpaceLeft()
           getFiles();
           setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "A new file has been added."])
-
+        }
+        else if (data.message.name == 'ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE'){
+          setIsLocked(true)
+        }
+        else if (data.message.name == 'ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE'){
+          setIsLocked(false)
         }
         else{
           setChatText((prevText) => [...prevText, data.message])
@@ -234,8 +235,13 @@ const Room = (props) =>{
         headers: { "Content-Type": "application/json" },
       };
 
-      fetch("/api/update-islocked/", requestOptions)
-        .then((response) => response.json());
+      client.send(JSON.stringify({
+        message: {
+            name: "ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE",
+            message: "placeholder",
+            time: now.format("HH:mm"),
+        }
+      }));
     }
 
     else{
@@ -246,8 +252,21 @@ const Room = (props) =>{
         headers: { "Content-Type": "application/json" },
       };
 
-      fetch("/api/update-islocked/", requestOptions)
-        .then((response) => response.json());
+      client.send(JSON.stringify({
+        message: {
+            name: "ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE",
+            message: "placeholder",
+            time: now.format("HH:mm"),
+        }
+      }));
+      
+      client.send(JSON.stringify({
+        message: {
+            name: props.name,
+            message: chatBoxText,
+            time: now.format("HH:mm"),
+        }
+      }));
     }
   }
 
