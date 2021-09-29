@@ -203,9 +203,10 @@ const Room = (props) =>{
       }
 
       
-      if(data.file_download){
+      //if(data.file_download)(this stopped working in production)
+      if(data.message.fileData){
         getSpaceLeft()
-        setFileURL((prevURLs) => [...prevURLs, data.file_download] );
+        setFileURL((prevURLs) => [...prevURLs, data.message.fileData] );
         setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "A new file has been added."])
       }
 
