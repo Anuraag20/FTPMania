@@ -160,29 +160,6 @@ const Room = (props) =>{
 
       console.log(data)
 
-      if(data.member_rejoined){
-
-        if(data.member_rejoined.old_name == name){
-          setIsActive(false);
-        }
-        else if(data.member_rejoined.old_name == data.member_rejoined.new_name){
-          setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.member_rejoined.new_name +"' rejoined"])
-        }
-        else{
-          setMembers((prevMembers) => {
-            let index = prevMembers.indexOf(data.member_rejoined.old_name);
-            if (index != -1){
-              prevMembers.splice(index, 1);
-              return [...prevMembers, data.member_rejoined.new_name];
-            }
-
-            return prevMembers;
-          });
-          setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.member_rejoined.old_name +"' rejoined as '" + data.member_rejoined.new_name + "'"])
-        }
-
-      }
-
       if(data.room_destroyed){
         setIsActive(false);
         client.close();
@@ -207,13 +184,12 @@ const Room = (props) =>{
         else if (data.message.name == 'SOMEONE_HAS_JUST_JOINED_THE_ROOM'){
 
           if(data.message.member_joined == name){
-            setIsActive(false);
+            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "You joined!"]);
           }
          
           let index = members.indexOf(data.message.member_joined);
           if (index != -1){
-            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + "rejoined!"]);
-            getMembers();
+            setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " rejoined!"]);
           }
           else{
             setRoomStatus((prevRoomStatus) => [...prevRoomStatus, "'" + data.message.member_joined + "'" + " joined!"]);
