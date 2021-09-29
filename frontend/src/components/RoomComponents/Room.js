@@ -229,7 +229,7 @@ const Room = (props) =>{
 
       fetch("/api/update-islocked/", requestOptions)
       .then((response) => response.json())
-      .them(data => {
+      .then(data => {
         client.send(JSON.stringify({
           message: {
               name: "ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE",
