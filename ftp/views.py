@@ -443,7 +443,7 @@ class FileUpload(APIView):
 
         data = {"file_url": file_field.downloadURL, "file_name": file_field.roomFile.name[8:]}
         send_channel_message(room.code, "file_download", data)
-        return Response({"File Upload Successful": data}, status = status.HTTP_202_ACCEPTED)
+        return Response({"file_upload_successful": data}, status = status.HTTP_202_ACCEPTED)
 
 class FileUploadSpace(APIView):
     
