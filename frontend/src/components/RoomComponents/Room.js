@@ -62,6 +62,8 @@ const Room = (props) =>{
   const [chatText, setChatText] = useState([]);
   const [fileURL, setFileURL] = useState([]);
 
+  var now = new moment();
+
 
 
   const getMembers = () => {
@@ -223,8 +225,6 @@ const Room = (props) =>{
 
   
   const handleLockChange = () => {
-
-    var now = new moment();
     
     if (!isLocked){
 
