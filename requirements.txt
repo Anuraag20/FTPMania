@@ -1,9 +1,13 @@
 Django==3.2.7
+django-core==1.4.1
+django-storages==1.10.1
+djangorestframework==3.12.4
 python-decouple==3.3
-djangorestframework
 channels==2.4.0
 psycopg2==2.8.5
-hurry.filesize
+hurry.filesize==0.9
 boto3==1.16.15
 botocore==1.19.15
-django-storages==1.10.1
+aioredis==1.3.1
+channels-redis==3.3.0
+hiredis==2.0.0
