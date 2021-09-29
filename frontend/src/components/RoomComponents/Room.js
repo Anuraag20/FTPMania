@@ -221,42 +221,53 @@ const Room = (props) =>{
     
     if (!isLocked){
 
-      setIsLocked(true);
+      
       const requestOptions = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       };
 
       fetch("/api/update-islocked/", requestOptions)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .them(data => {
+        client.send(JSON.stringify({
+          message: {
+              name: "ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE",
+              message: "placeholder",
+              time: now.format("HH:mm"),
+          }
+        }));
+        setIsLocked(true);
+        console.log(data);
+        return data;
+      });
 
-      client.send(JSON.stringify({
-        message: {
-            name: "ROOM_HAS_NOW_BEEN_LOCKED_FOR_EVERYONE",
-            message: "placeholder",
-            time: now.format("HH:mm"),
-        }
-      }));
+
     }
 
     else{
 
-      setIsLocked(false);
       const requestOptions = {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       };
 
       fetch("/api/update-islocked/", requestOptions)
-      .then((response) => response.json());
+      .then((response) => response.json())
+      .then(data => {
+        client.send(JSON.stringify({
+          message: {
+              name: "ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE",
+              message: "placeholder",
+              time: now.format("HH:mm"),
+          }
+        }));
+        setIsLocked(false);
+        console.log(data);
+        return data;
+      });
       
-      client.send(JSON.stringify({
-        message: {
-            name: "ROOM_HAS_NOW_BEEN_UNLOCKED_FOR_EVERYONE",
-            message: "placeholder",
-            time: now.format("HH:mm"),
-        }
-      }));
+
     }
   }
 
