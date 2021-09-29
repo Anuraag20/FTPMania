@@ -57,7 +57,7 @@ const FileManager = (props) =>{
                 setFileDrop(false);
                 setFile();
                 client.send(JSON.stringify({
-                    file: {
+                    message: {
                         name: 'lol'
                     }
                 }));
