@@ -27,7 +27,10 @@ const CreateRoom = (props) => {
           
           fetch("/api/delete-room/", requestOptions)
           .then((response) => response.json())
-          .then((data) => data)
+          .then((data) => {
+              handleRoomButtonPressed()
+              return data;
+          })
     }
 
 
@@ -48,7 +51,6 @@ const CreateRoom = (props) => {
                         
                         <Button size = "large" onClick = {() => {
                             destroyRoom();
-                            window.location.reload(false);
                         }} color = "secondary">
                             Destroy Room
                         </Button>
