@@ -344,7 +344,7 @@ const Room = (props) =>{
       id = "hello"
       duration = {3600}
       initialRemainingTime = {timeLeft}
-      onComplete = {() => destroyRoom()}
+      onComplete = {destroyRoom}
       //primary first, secondary next
       colors={[
       [darkState? "#7d4fba": "#3f51b5", 0.9],
@@ -404,7 +404,7 @@ const Room = (props) =>{
               isPlaying
               duration = {3600}
               initialRemainingTime = {timeLeft}
-              onComplete = {() => destroyRoom()}
+              onComplete = {destroyRoom}
               colors={[
                 [darkState? "#7d4fba": "#3f51b5", 0.9],
                 [darkState? "#ff4085": "#f50057", 0.1],
