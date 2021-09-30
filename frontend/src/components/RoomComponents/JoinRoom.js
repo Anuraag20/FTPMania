@@ -152,7 +152,7 @@ const JoinRoom = (props) => {
                 setErrorStatus();
                 setNoRoom(false);
                 getRoomDetails();
-                props.history.push("/room/" + roomCode);
+                props.history.push("/room/" + roomCode + "/");
             }   
         } 
     };
@@ -206,7 +206,7 @@ const JoinRoom = (props) => {
                                     setErrorStatus();
                                     setNoRoom(false);
                                     getRoomDetails();
-                                    props.history.push("/room/" + roomCode);
+                                    props.history.push("/room/" + roomCode + "/");
                                 }       
                             }}
                             >
@@ -232,7 +232,7 @@ const JoinRoom = (props) => {
                     </Grid>
                     <Grid item xs = {12} spacing =  {3}>
                         <Button size = "large" color = "primary" variant="contained" onClick = {() => {
-                            props.history.push("/room/" + isAlreadyHost);
+                            props.history.push("/room/" + isAlreadyHost + "/");
                             setIsAlreadyHost();
                             }}>
                             Go to that Room

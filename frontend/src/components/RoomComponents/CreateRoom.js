@@ -45,7 +45,7 @@ const CreateRoom = (props) => {
                         </Typography>
                     </Grid>
                     <Grid item xs = {12} spacing =  {5}>
-                        <Button size = "large" color = "primary" variant="contained" onClick = {() => props.history.push("/room/" + data.already_host)}>
+                        <Button size = "large" color = "primary" variant="contained" onClick = {() => props.history.push("/room/" + data.already_host + "/")}>
                             Go to that Room
                         </Button>
                         
@@ -61,7 +61,7 @@ const CreateRoom = (props) => {
     }
 
     else if(data.code) {
-        props.history.push("/room/" + data.code);
+        props.history.push("/room/" + data.code + "/");
     }
     
     return (    
