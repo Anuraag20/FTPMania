@@ -56,7 +56,6 @@ def expired(created_at):
     minutes = (now - created_at).seconds//60
     if minutes >= MINUTES_TO_EXPIRY:
         return True
-
     else:
         return False
 
@@ -138,6 +137,7 @@ class CreateRoomView(APIView):
             room = queryset[0]
 
             if expired(room.created_at):
+                delete_room_files(room)
                 room.delete()
             else:
                 data = {"already_host": str(room)}
@@ -181,6 +181,7 @@ class JoinRoom(APIView):
                 #Checks if the room has expired
                 if expired(queryset_room[0].created_at):
                     room = queryset_room[0]
+                    delete_room_files(room)
                     room.delete()
                     return Response({'Room Expired': 'The Room Will Soon be Deleted', 'status': 301}, status=status.HTTP_301_MOVED_PERMANENTLY)
                 
@@ -197,6 +198,7 @@ class JoinRoom(APIView):
                         if guest.is_host == True and guest.room != room:
                             if expired(guest.room.created_at):
                                 temp_room = guest.room
+                                delete_room_files(temp_room)
                                 temp_room.delete()
                             else:
                                 return Response({"already_host": str(guest.room)}, status = status.HTTP_200_OK)
@@ -367,6 +369,8 @@ class UpdateName(APIView):
             if room.exists():
                 room = room[0]
                 if expired(room.created_at):
+                    delete_room_files(room)
+                    room.delete()
                     return Response({'expired': 'Room Expired'}, status=status.HTTP_301_MOVED_PERMANENTLY)
             else:
                 return Response({'bad_request': 'Invalid data...'}, status=status.HTTP_400_BAD_REQUEST)
