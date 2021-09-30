@@ -26,8 +26,6 @@ def space_left(room):
     config=Config(signature_version='s3v4'),
     region_name = settings.AWS_S3_REGION_NAME)
 
-
-    files = File.objects.filter(room = room)
     size_of_files = 0
 
     response_contents = s3_client.list_objects_v2(
@@ -35,8 +33,7 @@ def space_left(room):
         Bucket = 'ftpmania'
         ).get('Contents')
 
-    print(response_contents)
-    if (response_contents):
+    if response_contents:
         for i in response_contents:
             size_of_files += i['Size']
             
@@ -99,6 +96,29 @@ def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_
     
     # The response contains the presigned URL
     return response
+
+def delete_room_files(room):
+          
+    session = boto3.session.Session()
+    s3_client = boto3.client('s3', 
+    endpoint_url= 'https://nyc3.digitaloceanspaces.com',
+    aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
+    aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
+    config=Config(signature_version='s3v4'),
+    region_name = settings.AWS_S3_REGION_NAME)
+
+    size_of_files = 0
+
+    response_contents = s3_client.list_objects_v2(
+        Prefix = 'ftpmania/' + str(room) + '/',
+        Bucket = 'ftpmania'
+        ).get('Contents')
+
+    if response_contents:
+        for file in response_contents:
+            file.delete()
+
+    
 
 class CreateRoomView(APIView):
     serializer_class = RoomSerializer
