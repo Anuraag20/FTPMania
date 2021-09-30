@@ -116,10 +116,9 @@ def delete_room_files(room):
     if response_contents:
         for file_data in response_contents:
             pass
-            # s3_client.delete_object(
-            #     Prefix = 'ftpmania/' + str(room) + '/',
-            #     Bucket = 'ftpmania',
-            #     Key = 'example-file-to-delete.ext')
+            s3_client.delete_object(
+                Bucket = 'ftpmania',
+                Key = file_data['Key'])
 
     
 
