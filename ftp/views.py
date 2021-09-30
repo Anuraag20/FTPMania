@@ -13,7 +13,7 @@ from botocore.exceptions import ClientError
 from django.conf import settings
 
 # Create your views here
-MINUTES_TO_EXPIRY = 2
+MINUTES_TO_EXPIRY = 60
 MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):
