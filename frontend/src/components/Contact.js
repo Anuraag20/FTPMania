@@ -41,7 +41,7 @@ const Contact = (props) => {
                             <br />
                             Do you feel like giving some of it away to a 20-year-old developer who worked <b> REALLY </b> hard on this project?
                             <br />
-                            If so, <i> YOU ARE IN LUCK! </i>. 
+                            If so, <i> YOU ARE IN LUCK! </i> 
                             <br />
                             Go ahead and buy me a Cup of Coffee! (Several Cups of Coffee sounds pretty great. I'd also settle for a VadaPav tbh)
 
