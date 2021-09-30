@@ -107,16 +107,19 @@ def delete_room_files(room):
     config=Config(signature_version='s3v4'),
     region_name = settings.AWS_S3_REGION_NAME)
 
-    size_of_files = 0
-
     response_contents = s3_client.list_objects_v2(
         Prefix = 'ftpmania/' + str(room) + '/',
         Bucket = 'ftpmania'
         ).get('Contents')
 
+
     if response_contents:
-        for file in response_contents:
-            file.delete()
+        for file_data in response_contents:
+            pass
+            # s3_client.delete_object(
+            #     Prefix = 'ftpmania/' + str(room) + '/',
+            #     Bucket = 'ftpmania',
+            #     Key = 'example-file-to-delete.ext')
 
     
 
