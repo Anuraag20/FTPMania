@@ -9,4 +9,5 @@ urlpatterns = [
     path('terms/', about),
     path('research/', about),
     path('contact/', about),
+    path('robots.txt/', robots),
 ]
