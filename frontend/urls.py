@@ -10,5 +10,4 @@ urlpatterns = [
     path('research/', about),
     path('contact/', about),
     path('robots.txt/', robots),
-    path('google77b694aaf072f976.html', google_verification),
 ]
