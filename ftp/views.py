@@ -492,12 +492,15 @@ class DeleteRoom(APIView):
         
         guest_session = self.request.session.session_key
 
-        room = Room.objects.filter(host = guest_session)[0]
+        host = Guest.objects.filter(guest = guest_session)[0]
+        room = Room.objects.filter(code = str(host.room))[0]
 
-        if room.exists():
+        if host.is_host:
             delete_room_files(room)
             room.delete()
+
             return Response({"Room Destroyed": "All the data has been purged"}, status = status.HTTP_301_MOVED_PERMANENTLY)
 
         else:
             return Response({"Bad Request": "Invalid Data..."}, status = status.HTTP_400_BAD_REQUEST)
+
