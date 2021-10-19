@@ -11,6 +11,8 @@ Allow: /
 
 
 '''
+def google_verification(request):
+    return render(request, "extras/google77b694aaf072f976.html")
 
 def robots(request):
     content = robots_file
