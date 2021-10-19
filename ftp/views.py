@@ -477,7 +477,7 @@ class LeaveRoom(APIView):
   
         #if the host leaves, we don't delete the entry. This is because we'll need 'is_host' later
         if guest.is_host:
-            return Response({"Exited": "Room Has Been Left"}, status = status.HTTP_200_OK)
+            return Response({"Has not Exited": "Host Cannot Leave the Room"}, status = status.HTTP_200_OK)
 
         guest.delete()
         return Response({"Exited": "Room Has Been Left"}, status = status.HTTP_200_OK)
