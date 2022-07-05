@@ -150,7 +150,7 @@ const About = (props) => {
                         <Box style = {{width: "60vw", height: "78vh"}}>
                             <iframe 
                             style = {{position: "relative", height: "100%", width: "100%"}}
-                            src="https://portal.termshub.io/ftpmania.tech/" 
+                            src="https://portal.termshub.io/ftpmania.tech/website_tos/" 
                             frameborder="0" 
                             marginheight="0" 
                             marginwidth="0">

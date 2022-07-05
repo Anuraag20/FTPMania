@@ -6,7 +6,7 @@ const GoodBye = (props) => {
     return (
         <div className = "center">
             <Typography commponent = "h2" variant = "h2" >
-                GoodBye, {props.name}!
+                Goodbye, {props.name}!
             </Typography>
 
             <br />

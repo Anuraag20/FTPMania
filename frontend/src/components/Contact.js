@@ -90,9 +90,9 @@ const Contact = (props) => {
 
                         
                         <Grid item xs = {4}> 
-                            <SocialIcon url = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" bgColor = "#BB100B" fgColor = "#FFFFFF" target = "_blank"/>
-                            <a href = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" className = {classes.anchor} target = "_blank"> 
-                                &nbsp;&nbsp; ftpmania.tech@gmail.com 
+                            <SocialIcon url = "mailto:anuraagmukherjee1@gmail.com?subject=From%20FTPMania%20User" bgColor = "#BB100B" fgColor = "#FFFFFF" target = "_blank"/>
+                            <a href = "mailto:anuraagmukherjee1@gmail.com?subject=From%20FTPMania%20User" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp; anuraagmukherjee1@gmail.com 
                             </a>
                         </Grid>
                     </Grid>
