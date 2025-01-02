@@ -33,7 +33,7 @@ import WbSunnyIcon from '@material-ui/icons/WbSunny';
 import NightsStayIcon from '@material-ui/icons/NightsStay';
 import GetAppIcon from '@material-ui/icons/GetApp';
 
-import {client, w3cwebsocket as W3Cwebsocket} from "websocket"
+import {client} from "websocket"
 
 
 const Room = (props) =>{
@@ -136,7 +136,7 @@ const Room = (props) =>{
     getTimeLeft();
     getFiles();
 
-    client = new W3Cwebsocket('ws://'+ window.location.host +'/ws/room/' + roomCode +'/')
+    client = new WebSocket('ws://'+ window.location.host +'/ws/room/' + roomCode +'/')
     
     client.onmessage = (receivedData) => {
       

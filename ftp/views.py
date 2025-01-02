@@ -2,6 +2,8 @@ from rest_framework import generics, status
 from .serializers import *
 from .models import *
 
+import re
+
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from channels.layers import get_channel_layer
@@ -14,6 +16,8 @@ MINUTES_TO_EXPIRY = 60
 MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):   
+    
+    assert re.match(r'[A-Z]{3}-[A-Z]{3}$', room), "invalid room code"
 
     total_size = 0
     base = settings.BASE_DIR / f'media/{room}'
@@ -60,16 +64,6 @@ def send_channel_message(group_name, type_of_message, message):
         'message': message
     })
 
-
-
-
-class RoomView(generics.ListAPIView):
-    queryset = Room.objects.all()
-    serializer_class = RoomSerializer
-
-class GuestView(generics.ListAPIView):
-    queryset = Guest.objects.all()
-    serializer_class = GuestSerializer
 
 class FileView(generics.ListAPIView):
     queryset = File.objects.all()
