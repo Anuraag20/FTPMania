@@ -17,7 +17,7 @@ MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
 def space_left(room):   
     
-    assert re.match(r'[A-Z]{3}-[A-Z]{3}$', room), "invalid room code"
+    assert re.match(r'[A-Z]{3}-[A-Z]{3}$', room.code), "invalid room code"
 
     total_size = 0
     base = settings.BASE_DIR / f'media/{room}'
