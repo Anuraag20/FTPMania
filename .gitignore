@@ -4,4 +4,4 @@ frontend/static/frontend/*
 static/*
 media/*
 *.pyc
-
+*__pycache__/*

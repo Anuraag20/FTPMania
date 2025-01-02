@@ -1,47 +1,30 @@
-from django.shortcuts import render
 from rest_framework import generics, status
 from .serializers import *
 from .models import *
 
-from hurry.filesize import size
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 from datetime import datetime, timezone
-import boto3
-from botocore.client import Config
-from botocore.exceptions import ClientError
 from django.conf import settings
-
+import os
 # Create your views here
 MINUTES_TO_EXPIRY = 60
 MAX_ROOM_FILE_SIZE = 500 * 1024 * 1024
 
-def space_left(room):
+def space_left(room):   
 
-    s3_client = boto3.client('s3', 
-    aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
-    aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
-    config=Config(signature_version='s3v4'),
-    region_name = settings.AWS_S3_REGION_NAME)
-
-
-    files = File.objects.filter(room = room)
-    size_of_files = 0
-
-    response_contents = s3_client.list_objects_v2(
-        Prefix = str(room.code) + '/',
-        Bucket = settings.AWS_STORAGE_BUCKET_NAME
-        ).get('Contents')
-
-    if (response_contents):
-        for i in response_contents:
-            size_of_files += i['Size']
-            
-        return  MAX_ROOM_FILE_SIZE - size_of_files if MAX_ROOM_FILE_SIZE - size_of_files > 0 else 0
-    else:
+    total_size = 0
+    base = settings.BASE_DIR / f'media/{room}'
+    try: 
+        for f in os.listdir(base):
+            fp = os.path.join(base, f)
+            total_size += os.path.getsize(fp)
+    except FileNotFoundError:
         return MAX_ROOM_FILE_SIZE
+    else:
+        return  MAX_ROOM_FILE_SIZE - total_size if MAX_ROOM_FILE_SIZE - total_size > 0 else 0
      
 def is_space_available(room, received_file):    
 
@@ -77,34 +60,6 @@ def send_channel_message(group_name, type_of_message, message):
         'message': message
     })
 
-def create_presigned_url(object_name, bucket_name = settings.AWS_STORAGE_BUCKET_NAME, expiration = MINUTES_TO_EXPIRY*60):
-    
-    """Generate a presigned URL to share an S3 object
-
-    :param bucket_name: string
-    :param object_name: string
-    :param expiration: Time in seconds for the presigned URL to remain valid
-    :return: Presigned URL as string. If error, returns None.
-    """
-  
-    # Generate a presigned URL for the S3 object
-    s3_client = boto3.client('s3', 
-    aws_access_key_id = settings.AWS_ACCESS_KEY_ID, 
-    aws_secret_access_key = settings.AWS_SECRET_ACCESS_KEY, 
-    config=Config(signature_version='s3v4'),
-    region_name = settings.AWS_S3_REGION_NAME)
-    try:
-        response = s3_client.generate_presigned_url('get_object',
-                                                    Params={'Bucket': bucket_name,
-                                                            'Key': object_name,
-                                                            'ResponseContentDisposition': f"attachment; filename = {object_name}"},
-                                                    ExpiresIn = expiration)
-    except ClientError as e:
-        print(e)
-        return None
-    
-    # The response contains the presigned URL
-    return response
 
 
 
@@ -429,13 +384,8 @@ class FileUpload(APIView):
        
         received_file = request.FILES['file']
 
-        file_field = File(room = room, roomFile = received_file)
+        file_field = File.objects.create(room = room, roomFile = received_file)
         
-        file_field.save()
-
-        file_field.downloadURL = create_presigned_url(file_field.roomFile.name, expiration = time_left(room.created_at) )
-        file_field.save(update_fields = ['downloadURL'])
-
         data = {"file_url": file_field.downloadURL, "file_name": file_field.roomFile.name[8:]}
         send_channel_message(room.code, "file_download", data)
         return Response({"File Upload Successful": "Data Received"}, status = status.HTTP_202_ACCEPTED)

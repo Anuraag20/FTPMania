@@ -47,4 +47,7 @@ class Guest(models.Model):
 class File(models.Model):
     room = models.ForeignKey(Room, on_delete = models.CASCADE)
     roomFile = models.FileField(upload_to = get_file_path)
-    downloadURL = models.TextField(default = "")
+    
+    @property
+    def downloadURL(self):
+        return self.roomFile.url

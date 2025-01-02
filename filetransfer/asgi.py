@@ -10,7 +10,18 @@ https://docs.djangoproject.com/en/3.2/howto/deployment/asgi/
 import os
 import django
 from django.core.asgi import get_asgi_application
+from decouple import config
+from .routing import router
+from channels.routing import ProtocolTypeRouter
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'filetransfer.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', f"{config('PROJECT_NAME')}.settings")
+
 django.setup()
-application = get_asgi_application()
+
+application = ProtocolTypeRouter(
+            {
+                        "http": get_asgi_application(),
+                        "websocket": router
+            }
+)
+
