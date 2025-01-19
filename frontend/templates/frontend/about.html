@@ -4,13 +4,9 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>
-            FTP Mania - 
-            {% if request.path == '/terms/' %}
-                Terms
-            {% elif request.path == '/about/' %}
+            FTP Mania -  
+            {% if request.path == '/about/' %}
                 About
-            {% elif request.path == '/contact/' %}
-                Contact
             {% elif request.path == '/research/' %}
                 Research
             {% endif %}

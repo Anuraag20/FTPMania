@@ -46,7 +46,7 @@ const Room = (props) =>{
   
   const classes = useStyles();
 
-  const [tnc, setTnc] = useState(true);
+  //const [tnc, setTnc] = useState(true);
 
   const [members, setMembers] = useState([])
   const [isLocked, setIsLocked] = useState(props.isLocked);
@@ -509,31 +509,7 @@ const Room = (props) =>{
               </Button>
             </DialogActions>
           </Dialog>
-        
-          <Dialog open = {tnc} aria-labelledby="form-dialog-title">
-            <DialogTitle style = {{overflowWrap: "break-word"}} id="form-dialog-title"> 
-                Make sure you've read our ToS in its entirety! 
-            </DialogTitle>
-
-            <DialogActions>
-
-
-              <Button onClick = {() => setTnc(false)} color = "primary">
-                I've read and accepted it
-              </Button>
-
-
-              <a href = '/terms' className = {classes.anchor} target = "_blank">
-                <Button color = "secondary">
-                  Take me there
-                </Button>
-              </a>
-
-
-                
-            </DialogActions>
-        </Dialog>
-        
+ 
         </ThemeProvider>
       </div>
     );

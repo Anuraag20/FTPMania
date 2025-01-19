@@ -6,7 +6,7 @@ urlpatterns = [
     path('room/', index),
     path('room/<str:roomCode>/', index),
     path('about/', about),
-    path('terms/', about),
+    #path('terms/', about),
     path('research/', about),
-    path('contact/', about),
+    #path('contact/', about),
 ]

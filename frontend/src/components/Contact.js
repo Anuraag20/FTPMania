@@ -28,7 +28,7 @@ const Contact = (props) => {
                 <Grid container justifyContent = "center" style = {{marginBottom: "3vh"}}>
                     <Grid item xs = {12} style = {{textAlign: "center"}}>
                         <Typography component = "body1" variant = "body1">
-                            Hi there, this is Anuraag. I am a Computer Science Student from Mumbai and <b> FTPMania </b> is my project.
+                            Hi there, this is Anuraag. I am a Software Developer and Data Scientist from London and <b> FTPMania </b> is my project.
 
                             <br />
 
@@ -36,24 +36,7 @@ const Contact = (props) => {
 
                             <br />
                             <br />
-
-                            Do you have too much money?
-                            <br />
-                            Do you feel like giving some of it away to a 20-year-old developer who worked <b> REALLY </b> hard on this project?
-                            <br />
-                            If so, <i> YOU ARE IN LUCK! </i>. 
-                            <br />
-                            Go ahead and buy me a Cup of Coffee! (Several Cups of Coffee sounds pretty great. I'd also settle for a VadaPav tbh)
-
-                            <Paper style = {{maxWidth: "40vh", maxHeight: "40vh", margin: "auto", marginTop: "2vh"}}>
-                                <CardMedia
-                                style = {{margin: "auto"}}
-                                component="img"
-                                alt="UPI Code"
-                                image="/static/images/gpayCode.jpeg"
-                                title="UPI Code"
-                                />
-                            </Paper>
+		
                            
                         </Typography>
                     </Grid>
@@ -74,9 +57,9 @@ const Contact = (props) => {
                 <AppBar style={{ background: appBarColor, boxShadow: 'none', top: 'auto', bottom: 0, height: "9vh"}}>
                     <Grid container spacing = {1} style = {{textAlign: "center", paddingBottom: "10px", paddingTop: "7px"}}>
                         <Grid item xs = {4}> 
-                            <SocialIcon url = "https://www.instagram.com/anuraagtriestosing/" fgColor = "#FFFFFF" target = "_blank"/>
-                            <a href = "https://www.instagram.com/anuraagtriestosing/" className = {classes.anchor} target = "_blank"> 
-                                &nbsp;&nbsp;Instagram (I make music here!) 
+                            <SocialIcon url = "https://www.linkedin.com/in/anuraag-m/" fgColor = "#FFFFFF" target = "_blank"/>
+                            <a href = "https://www.linkedin.com/in/anuraag-m/" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp;LinkedIn
                             </a>
                         </Grid>
 
@@ -90,9 +73,9 @@ const Contact = (props) => {
 
                         
                         <Grid item xs = {4}> 
-                            <SocialIcon url = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" bgColor = "#BB100B" fgColor = "#FFFFFF" target = "_blank"/>
-                            <a href = "mailto:ftpmania.tech@gmail.com?subject=From%20FTPMania%20User" className = {classes.anchor} target = "_blank"> 
-                                &nbsp;&nbsp; ftpmania.tech@gmail.com 
+                            <SocialIcon url = "https://anuraag.tech/" bgColor = "#BB100B" fgColor = "#FFFFFF" target = "_blank"/>
+                            <a href = "https://anuraag.tech/" className = {classes.anchor} target = "_blank"> 
+                                &nbsp;&nbsp; Website 
                             </a>
                         </Grid>
                     </Grid>

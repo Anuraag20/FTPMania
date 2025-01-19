@@ -41,7 +41,8 @@ const Navigation = (props) =>{
                             About FTPMania
                         </MenuItem>
                     </a>
-
+		    
+	            
                     <a href = "/research" className = {classes.anchor}>
                         <Tooltip title = "Help me out to collect some data!" interactive> 
                             <MenuItem>
@@ -50,16 +51,9 @@ const Navigation = (props) =>{
                         </Tooltip>
                     </a>
                     
+
                     <div className = {classes.rightAlign} />
-
-                    <Box edge = "end">
-                        <a href = "/contact" className = {classes.anchor}>
-                            <MenuItem>
-                                Contact
-                            </MenuItem>
-                        </a>
-                    </Box>
-
+			
                 </Toolbar>
             </AppBar>
       </ThemeProvider>

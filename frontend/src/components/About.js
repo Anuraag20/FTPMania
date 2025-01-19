@@ -114,13 +114,8 @@ const About = (props) => {
                                     <i> "Edward Snowden could have been avoided" </i> &nbsp;-&nbsp; The CIA (Probably, idk)
                                 </Typography>
                             </Paper>
+			     
 
-                            <Typography component = "body1" variant = "body1" >
-                                <br />
-                                If you have gotten this far, don't forget to read through our <a href = "/terms" style = {{color: "inherit"}}> Terms of Service</a>.
-                                <br />
-                                <br />
-                            </Typography>
                         </Grid>
                     </Grid>
                     <br />
@@ -132,7 +127,7 @@ const About = (props) => {
             </ThemeProvider>
         );
     }
-
+    /*
     else if(window.location.pathname == '/terms/'){
         return(
             <ThemeProvider theme = {darkTheme}>
@@ -182,11 +177,11 @@ const About = (props) => {
         </ThemeProvider>
         );
     }
-
     else if(window.location.pathname == '/contact/'){
         return <Contact />;
     }
-
+    */
+    
     else if(window.location.pathname == '/research/'){
         return(
             <ThemeProvider theme = {darkTheme}>
