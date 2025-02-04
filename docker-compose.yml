@@ -1,0 +1,33 @@
+
+services:
+    web:
+      container_name: web
+      build:
+        dockerfile: ./Dockerfile
+      command: bash -c "python3 manage.py migrate && python3 manage.py runserver 0.0.0.0:8000"
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
+      volumes:
+        - media:/usr/src/app/media
+    db:
+      image: postgres:15
+      volumes:
+        - pg_data:/var/lib/postgresql/data/
+      # The values chosen here must be reflected in filetransfer/settings.ini
+      environment:
+        - POSTGRES_USER=django
+        - POSTGRES_PASSWORD=password
+        - POSTGRES_DB=ftpmania_db
+
+    redis:
+      image: redis:6.0.16-alpine
+      restart: always
+      container_name : redis
+      ports:
+        - "6379:6379"
+
+volumes:
+  pg_data:
+  media:
